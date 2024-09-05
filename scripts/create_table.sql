@@ -14,7 +14,7 @@ CREATE TABLE store_records (
     postal_code INT,
     region VARCHAR(25),
     product_id VARCHAR(30),
-    category VARCHAR(30)
+    category VARCHAR(30),
     subcategory VARCHAR(30),
     product_name VARCHAR(70),
     sales FLOAT,
