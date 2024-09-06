@@ -1,7 +1,7 @@
 CREATE TABLE store_records (
     id SERIAL PRIMARY KEY,
     row_id INT,
-    order_id INT,
+    order_id VARCHAR(20),
     order_date VARCHAR(10), 
     ship_date VARCHAR(10),
     ship_mode VARCHAR(25),
@@ -16,7 +16,7 @@ CREATE TABLE store_records (
     product_id VARCHAR(30),
     category VARCHAR(30),
     sub_category VARCHAR(30),
-    product_name VARCHAR(70),
+    product_name VARCHAR(200),
     sales FLOAT,
     quantity INT,
     discount FLOAT,
