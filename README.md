@@ -10,5 +10,5 @@ Data points for the dashboard:
 - ✅ states that purchase the most products (and also for region)
 - ✅ the most popular products per region
 - ✅ profits by shipping type
-- profits by prodcut category
+- ✅ profits by prodcut category
 - list of products consistently in high demand across all years
