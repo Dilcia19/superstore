@@ -11,7 +11,7 @@ Data points for the dashboard:
 - ✅ the most popular products per region
 - ✅ profits by shipping type
 - ✅ profits by prodcut category
-- 🗸 list of products consistently in high demand across all years
+- 🗸 list of products consistently in high demand across all years (started)
 
 **KPIs added after Convo w/ Cheng**
 Additional dashboard data points:
@@ -20,8 +20,8 @@ Additional dashboard data points:
     - are profits up?
     - are sales up?
 - year/year sales trends
-- top 5 products (% in margin, quantity)
-- profit by region/shipping/segment
+- ✅ top 5 products (% in margin, quantity)
+- ✅ profit by region/shipping/segment
 - volume & total sales quantity
 - most popular items
 - total sales
