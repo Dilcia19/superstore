@@ -15,10 +15,10 @@ Data points for the dashboard:
 
 **KPIs added after Convo w/ Cheng**
 Additional dashboard data points:
-- how much $ was generated in the last year?
-    - did it increase/decrease?
-    - are profits up?
-    - are sales up?
+- ✅ how much $ was generated in the last year?
+    - ✅ did it increase/decrease?
+    - ✅ are profits up?
+    - ✅ are sales up?
 - year/year sales trends
 - ✅ top 5 products (% in margin, quantity)
 - ✅ profit by region/shipping/segment
