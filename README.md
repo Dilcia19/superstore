@@ -23,8 +23,7 @@ Additional dashboard data points:
 - ✅ top 5 products (% in margin, quantity)
 - ✅ profit by region/shipping/segment
 - ✅ volume & total sales quantity
-- most popular items
-- total sales
+- ✅ most popular items
 - gross rate for sales quantity
 - retention rate - ie, how many of those customers have come back, what % of purchases are repeated (customerID)
 - also, what are repeat customers repeat buying & which repeat products bring the highest profit
