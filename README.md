@@ -30,7 +30,10 @@ Additional dashboard data points:
 - ✅ also, what are repeat customers repeat buying 
 - ✅ & which repeat products bring the highest profit
 - ✅ what is the general ship date after order date
-- does first class shipping decrease the margin of profitability
+- ❌ does first class shipping decrease the margin of profitability
+    - can't answer this with the data because it doesn't have information about how much each shipping mode costs
+    - the profitability or lackthereof then cannot be assessed by high or low profits - as those can be attributed to the type of products among other things
+    - ✅ what I did figure out is, per order First Class shipping provides the most profit
 - volume is important - what category of product is most profitable
     - have a year/year chart of profitable product, popular product
 
