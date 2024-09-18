@@ -35,6 +35,7 @@ Additional dashboard data points:
     - the profitability or lackthereof then cannot be assessed by high or low profits - as those can be attributed to the type of products among other things
     - ✅ what I did figure out is, per order First Class shipping provides the most profit
 - ✅ volume is important - what category of product is most profitable
-    - have a year/year chart of profitable product, popular product
+    - ❌ have a year/year chart of profitable product, popular product
+        - I struggled with this one, we should work through it during our call
 
 
