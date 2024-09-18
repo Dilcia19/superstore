@@ -27,7 +27,8 @@ Additional dashboard data points:
 - ✅ gross rate for sales quantity
 - ✅ retention rate - ie, how many of those customers have come back
 - ✅ what % of purchases are repeated (customerID)
-- also, what are repeat customers repeat buying & which repeat products bring the highest profit
+- ✅ also, what are repeat customers repeat buying 
+- & which repeat products bring the highest profit
 - what is the general ship date after order date
 - does first class shipping decrease the margin of profitability
 - volume is important - what category of product is most profitable
