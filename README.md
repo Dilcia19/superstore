@@ -29,7 +29,7 @@ Additional dashboard data points:
 - ✅ what % of purchases are repeated (customerID)
 - ✅ also, what are repeat customers repeat buying 
 - ✅ & which repeat products bring the highest profit
-- what is the general ship date after order date
+- ✅ what is the general ship date after order date
 - does first class shipping decrease the margin of profitability
 - volume is important - what category of product is most profitable
     - have a year/year chart of profitable product, popular product
