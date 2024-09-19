@@ -4,9 +4,9 @@
 
 **KPIs**
 Data points for the dashboard:
-- ✅ category of most sold products (rank top 5)
-- ✅ top 5 list of products that generate the most profit 
-- ✅ top 5 list of products that generate the least profit
+- ✅ ✅ category of most sold products (rank top 5)
+- ✅ ✅ top 5 list of products that generate the most profit 
+- ✅ ✅ top 5 list of products that generate the least profit
 - ✅ states that purchase the most products (and also for region)
 - ✅ the most popular products per region
 - ✅ profits by shipping type
@@ -38,3 +38,4 @@ Additional dashboard data points:
         - I struggled with this one, we should work through it during our call
 
 
+# second check mark for if I answered the question in SQL as well
