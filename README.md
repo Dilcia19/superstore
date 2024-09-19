@@ -4,13 +4,13 @@
 
 **KPIs**
 Data points for the dashboard:
-- ✅ ✅ category of most sold products (rank top 5)
-- ✅ ✅ top 5 list of products that generate the most profit 
-- ✅ ✅ top 5 list of products that generate the least profit
-- ✅ states that purchase the most products (and also for region)
-- ✅ the most popular products per region
-- ✅ profits by shipping type
-- ✅ profits by prodcut category
+- ✅ ✅ (1) category of most sold products (rank top 5)
+- ✅ ✅ (2) top 5 list of products that generate the most profit 
+- ✅ ✅ (3) top 5 list of products that generate the least profit
+- ✅ (4) states that purchase the most products (and also for region)
+- ✅ (5) the most popular products per region
+- ✅ (6) profits by shipping type
+- ✅ (7) profits by prodcut category
 
 **KPIs added after Convo w/ Cheng**
 Additional dashboard data points:
