@@ -39,3 +39,6 @@ Additional dashboard data points:
 
 
 # second check mark for if I answered the question in SQL as well
+- meeting with Cheng
+- year/year profits approach
+- discount approach
