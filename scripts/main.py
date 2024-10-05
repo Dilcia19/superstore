@@ -95,7 +95,9 @@ def custom_metric(label, value, delta_value):
 
 store_records = pd.read_csv('data/sample_superstore_updated.csv', dtype={'year':int})
 
-st.markdown("<h1 style='text-align: center; color: dark-blue;'>Super Store Dashboard</h1>", unsafe_allow_html=True)
+st.markdown(
+    "<h1 style='text-align: center; color: dark-blue; margin-bottom: 0px; padding-bottom: 0px;'>Super Store Dashboard</h1>", 
+    unsafe_allow_html=True)
 st.write("\n")
 
 with st.sidebar:
@@ -123,7 +125,7 @@ with col2:
 with col3:
     custom_metric("% Repeat Customers", f"{repeat_order_pct}%", '')
 
-st.write("__________________________________________________________________")
+st.markdown("<hr style='margin-top: 10px;'>", unsafe_allow_html=True)
 
 # col4, col5, col6= st.columns(3)
 # col4, col5, col6 = st.columns(3)
