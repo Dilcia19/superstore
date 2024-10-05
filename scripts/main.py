@@ -188,7 +188,68 @@ with col6:
     map.update_layout(title_text="Profits by State", title_x=0.5)
     
     # Display the map in Streamlit
-    st.plotly_chart(map)
+    st.plotly_chart(map, key="map1")
+
+col7, col8, col9 = st.columns([1, 1, 2])
+
+with col7:
+    df = store_records[store_records['year'] == selected_year]
+    top_subs = top_sub_categories_profit(df)
+    top_subs = top_subs.rename(columns={'sub_category':'Sub-categories'})
+
+
+    # Create a bar chart with sorted bars
+    chart = alt.Chart(top_subs).mark_bar().encode(
+        x=alt.X('Sub-categories:N', sort='-y'),  # Sort x-axis based on y-values in descending order
+        y=alt.Y('profit:Q', title='Profit'),
+    ).properties(
+        width=alt.Step(80),
+        title="Top 5 Sub-categories by Profit"   # Adjust bar width as needed
+    )
+
+    # Display the chart in Streamlit
+    st.altair_chart(chart, use_container_width=True)
+
+
+with col8:
+    df = store_records[store_records['year'] == selected_year]
+    top_subs_sales = top_sub_categories_sales(df)
+    top_subs_sales = top_subs_sales.rename(columns={'sub_category':'Sub-categories'})
+    # Create a bar chart with sorted bars
+    chart = alt.Chart(top_subs_sales).mark_bar().encode(
+        x=alt.X('Sub-categories:N', sort='-y'),  # Sort x-axis based on y-values in descending order
+        y=alt.Y('sales:Q', title='Sales'),
+    ).properties(
+        width=alt.Step(80),
+        title="Top 5 Sub-categories by Sales"   # Adjust bar width as needed
+    )
+    # Display the chart in Streamlit
+    st.altair_chart(chart, use_container_width=True)
+
+with col9:
+    df = store_records[store_records['year'] == selected_year]
+    gp_states_profit = profits_and_sales_by_state(df)
+    gp_states_profit['state_abbrev'] = gp_states_profit['state'].map(states_abbreviation)
+
+    # Create a custom color scale: red for negative profits, blue for positive profits
+    color_scale = [[0, 'red'], [0.5, 'lightgray'], [1, 'blue']]  # Adjust lightgray for profits near zero
+
+    # Create a map
+    map2 = px.choropleth(
+        gp_states_profit,
+        locations='state_abbrev',
+        locationmode='USA-states',
+        color='profit',
+        scope='usa',
+        hover_name='state',
+        color_continuous_scale=color_scale
+    )
+
+    # Update layout
+    map2.update_layout(title_text="Profits by State", title_x=0.5)
+    
+    # Display the map in Streamlit
+    st.plotly_chart(map2, key="map2")
 
 
 
