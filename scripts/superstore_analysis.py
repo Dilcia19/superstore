@@ -147,6 +147,17 @@ def high_sales_categories(df_filtered):
 
     return top_5_high_profit_categories
 
+def high_profit_segments(df_filtered):
+
+    high_profit_segments = df_filtered[['segment','profit']].groupby('segment').agg({'profit':'sum'}).reset_index()
+    high_profit_segments = high_profit_segments.sort_values(by='profit', ascending=False)
+    high_profit_segments['total_year_profit'] = high_profit_segments['profit'].sum()
+    high_profit_segments['segment_profit_pct'] = (high_profit_segments['profit'] / high_profit_segments['total_year_profit']) * 100
+    high_profit_segments['segment_profit_pct'] = high_profit_segments['segment_profit_pct'].round(0)
+    high_profit_segments = high_profit_segments.iloc[0:5]
+
+    return high_profit_segments
+
 
 
 

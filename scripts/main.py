@@ -11,7 +11,7 @@ import plotly.express as px
 import pandas as pd
 import numpy as np
 from superstore_analysis import profit_delta, repeat_customers, top_sub_categories_profit, top_sub_categories_sales
-from superstore_analysis import profits_by_state, sales_by_state, high_profit_products, high_profit_categories, high_sales_categories
+from superstore_analysis import profits_by_state, sales_by_state, high_profit_categories, high_sales_categories, high_profit_segments
 from state_abbrev import states_abbreviation
 
 #######################
@@ -201,6 +201,7 @@ with col7:
     df = store_records[store_records['year'] == selected_year]
     top_5_high_profit_categories = high_profit_categories(df)
     top_5_high_sales_categories = high_sales_categories(df)
+    top_5_high_profit_segments = high_profit_segments(df)
 
     col7_1, col7_2, col7_3 = st.columns([1, 1, 1])
         
@@ -235,22 +236,19 @@ with col7:
        
 
     # Add content to the third column
-    with col7_3:
-        top_3_high_profit_categories = top_5_high_profit_categories.iloc[2:3]
-        category_name = top_3_high_profit_categories['category'].values[0]
-        category_profit_pct_value = top_3_high_profit_categories['category_profit_pct'].values[0]
-        # Create a donut chart
-        remaining_value = 100 - category_profit_pct_value
+    with col7_3:    
         fig = px.pie(
-            names=[category_name, 'Other'],  # Use the category name and label the remaining portion as 'Other'
-            values=[category_profit_pct_value, remaining_value],  # Include both values
+            top_5_high_profit_segments,
+            values='segment_profit_pct',
+            names='segment',
             hole=0.6,
-            title=f"{category_name}",
-            width=325,
-            height=325
+            title="Segment by Profit %",
+            width=300,
+            height=300
         )
         # Display the chart in Streamlit
         st.plotly_chart(fig, use_container_width=True, key="donut3")
+        
 
 with col8:
     df = store_records[store_records['year'] == selected_year]
