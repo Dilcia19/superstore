@@ -22,48 +22,6 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded")
 
-# Custom CSS to reduce spacing and center content
-st.markdown("""
-<style>
-    .main > div {
-        padding-top: 0rem;
-    }
-    .stMetric {
-        text-align: center;
-    }
-    .stMetric > div {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 0.5rem 0;
-    }
-    .stMetric label {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        min-height: 20px;
-        font-size: 0.9em;
-    }
-    .stMetric .css-1wivap2 {
-        font-size: 1.8rem;
-    }
-    h1 {
-        margin-top: 0.5rem;
-        margin-bottom: 0rem;
-        font-size: 2.2rem;
-    }
-    .stHorizontalBlock {
-        padding-top: 0;
-    }
-    .block-container {
-        padding-top: 0.5rem;
-        padding-bottom: 0;
-    }
-</style>
-""", unsafe_allow_html=True)
-
 # Custom function to display metric with value and delta side-by-side
 def custom_metric(label, value, delta_value):
     try:
@@ -104,6 +62,7 @@ with st.sidebar:
     # selected_year = st.sidebar.selectbox("Select Year:", store_records["year"].unique())
     selected_year = st.sidebar.selectbox("Select Year:", np.sort(store_records["year"].unique()))
     
+
 col1, col2, col3= st.columns(3)
 
 profit_delta_dict = profit_delta(store_records)
@@ -122,63 +81,3 @@ with col2:
 
 with col3:
     custom_metric("% Repeat Customers", f"{repeat_order_pct}%", '')
-
-st.write("__________________________________________________________________")
-
-# col4, col5, col6= st.columns(3)
-# col4, col5, col6 = st.columns(3)
-col4, col5, col6 = st.columns([1, 1, 2])
-
-with col4:
-    df = store_records[store_records['year'] == selected_year]
-    top_subs = top_sub_categories_profit(df)
-
-    st.header("Top 5 Sub-categories by Profit")
-
-    # Create a bar chart with sorted bars
-    chart = alt.Chart(top_subs).mark_bar().encode(
-        x=alt.X('sub_category:N', sort='-y'),  # Sort x-axis based on y-values in descending order
-        y=alt.Y('profit:Q', title='Profit'),
-    ).properties(
-        width=alt.Step(80)  # Adjust bar width as needed
-    )
-
-    # Display the chart in Streamlit
-    st.altair_chart(chart, use_container_width=True)
-
-
-with col5:
-    df = store_records[store_records['year'] == selected_year]
-    top_subs_sales = top_sub_categories_sales(df)
-    
-    st.header("Top 5 Sub-categories by Sales")
-    # Create a bar chart with sorted bars
-    chart = alt.Chart(top_subs_sales).mark_bar().encode(
-        x=alt.X('sub_category:N', sort='-y'),  # Sort x-axis based on y-values in descending order
-        y=alt.Y('sales:Q', title='Sales'),
-    ).properties(
-        width=alt.Step(80)  # Adjust bar width as needed
-    )
-    # Display the chart in Streamlit
-    st.altair_chart(chart, use_container_width=True)
-
-with col6:
-    df = store_records[store_records['year'] == selected_year]
-    gp_states_profit = profits_and_sales_by_state(df)
-    gp_states_profit['state_abbrev'] = gp_states_profit['state'].map(states_abbreviation)
-    # create altair map
-    st.header("Profits by State")
-    # Create a map
-    map = px.choropleth(gp_states_profit, locations='state_abbrev', locationmode='USA-states', color='profit', scope='usa', hover_name='state', color_continuous_scale='Viridis')
-    st.plotly_chart(map)
-
-st.write("__________________________________________________________________")
-
-
-
-
-
-    
-
- 
- 
