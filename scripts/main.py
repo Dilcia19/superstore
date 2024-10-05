@@ -61,6 +61,7 @@ st.markdown("""
         padding-top: 0.5rem;
         padding-bottom: 0;
     }
+
 </style>
 """, unsafe_allow_html=True)
 
@@ -105,7 +106,6 @@ with st.sidebar:
     st.write("- The Super Store was founded at the end of 2013 and started selling products in 2014.")
     st.write("- The store has seen year over year growth in terms of sales and profits.")
     st.write("- With the elimination of a few key products, we will set up the super store to break record profits and sales in the upcoming years.")
-    # selected_year = st.sidebar.selectbox("Select Year:", store_records["year"].unique())
     selected_year = st.sidebar.selectbox("Select Year:", np.sort(store_records["year"].unique()))
     
 col1, col2, col3= st.columns(3)
@@ -135,14 +135,13 @@ with col4:
     df = store_records[store_records['year'] == selected_year]
     top_subs = top_sub_categories_profit(df)
 
-    st.header("Top 5 Sub-categories by Profit")
-
     # Create a bar chart with sorted bars
     chart = alt.Chart(top_subs).mark_bar().encode(
         x=alt.X('sub_category:N', sort='-y'),  # Sort x-axis based on y-values in descending order
         y=alt.Y('profit:Q', title='Profit'),
     ).properties(
-        width=alt.Step(80)  # Adjust bar width as needed
+        width=alt.Step(80),
+        title="Top 5 Sub-categories by Profit"   # Adjust bar width as needed
     )
 
     # Display the chart in Streamlit
@@ -152,14 +151,13 @@ with col4:
 with col5:
     df = store_records[store_records['year'] == selected_year]
     top_subs_sales = top_sub_categories_sales(df)
-    
-    st.header("Top 5 Sub-categories by Sales")
     # Create a bar chart with sorted bars
     chart = alt.Chart(top_subs_sales).mark_bar().encode(
         x=alt.X('sub_category:N', sort='-y'),  # Sort x-axis based on y-values in descending order
         y=alt.Y('sales:Q', title='Sales'),
     ).properties(
-        width=alt.Step(80)  # Adjust bar width as needed
+        width=alt.Step(80),
+        title="Top 5 Sub-categories by Sales"   # Adjust bar width as needed
     )
     # Display the chart in Streamlit
     st.altair_chart(chart, use_container_width=True)
@@ -168,10 +166,14 @@ with col6:
     df = store_records[store_records['year'] == selected_year]
     gp_states_profit = profits_and_sales_by_state(df)
     gp_states_profit['state_abbrev'] = gp_states_profit['state'].map(states_abbreviation)
-    # create altair map
-    st.header("Profits by State")
     # Create a map
-    map = px.choropleth(gp_states_profit, locations='state_abbrev', locationmode='USA-states', color='profit', scope='usa', hover_name='state', color_continuous_scale='Blues')
+    map = px.choropleth(gp_states_profit, 
+                        locations='state_abbrev', 
+                        locationmode='USA-states', 
+                        color='profit', scope='usa', 
+                        hover_name='state', 
+                        color_continuous_scale='Blues')
+    map.update_layout(title_text="Profits by State", title_x=0.5)
     st.plotly_chart(map)
 
 st.write("__________________________________________________________________")
