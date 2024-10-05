@@ -1,4 +1,4 @@
-# superstore_analysis
+# Superstore Analysis
 
 - The Super Store was founded at the end of 2013 and started selling products in 2014. 
 - The store has seen year over year growth in terms of sales and profits. 
