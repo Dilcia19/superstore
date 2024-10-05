@@ -204,50 +204,47 @@ with col7:
     top_5_high_profit_segments = high_profit_segments(df)
 
     col7_1, col7_2, col7_3 = st.columns([1, 1, 1])
-        
-    with col7_1:
 
-        fig = px.pie(
+    with col7_1:
+        fig1 = px.pie(
             top_5_high_profit_categories,
             values='category_profit_pct',
             names='category',
             hole=0.6,
-            title="Category by Profit %",
-            width=300,
-            height=300
+            title="Category by Profit %"
         )
-        # Display the chart in Streamlit
-        st.plotly_chart(fig, use_container_width=True, key="donut1")
+        # Update layout to adjust legend and prevent cut-off
+        fig1.update_traces(textinfo='percent+label')  # Show percentages and labels
+        fig1.update_layout(legend=dict(font=dict(size=10)), title_font_size=14)  # Adjust legend and title font size
+        st.plotly_chart(fig1, use_container_width=True, key="donut1")  # Ensure it fits within the column
 
-    # Add content to the second column
     with col7_2:
-
-        fig = px.pie(
+        fig2 = px.pie(
             top_5_high_sales_categories,
             values='category_sales_pct',
             names='category',
             hole=0.6,
-            title="Category by Sales %",
-            width=300,
-            height=300
+            title="Category by Sales %"
         )
-        # Display the chart in Streamlit
-        st.plotly_chart(fig, use_container_width=True, key="donut2")
-       
+        # Update layout to adjust legend and prevent cut-off
+        fig2.update_traces(textinfo='percent+label')  # Show percentages and labels
+        fig2.update_layout(legend=dict(font=dict(size=10)), title_font_size=14)  # Adjust legend and title font size
+        st.plotly_chart(fig2, use_container_width=True, key="donut2")  # Ensure it fits within the column
 
-    # Add content to the third column
-    with col7_3:    
-        fig = px.pie(
+    with col7_3:
+        fig3 = px.pie(
             top_5_high_profit_segments,
             values='segment_profit_pct',
             names='segment',
             hole=0.6,
-            title="Segment by Profit %",
-            width=300,
-            height=300
+            title="Segment by Profit %"
         )
-        # Display the chart in Streamlit
-        st.plotly_chart(fig, use_container_width=True, key="donut3")
+        # Update layout to adjust legend and prevent cut-off
+        fig3.update_traces(textinfo='percent+label')  # Show percentages and labels
+        fig3.update_layout(legend=dict(font=dict(size=10)), title_font_size=14)  # Adjust legend and title font size
+        st.plotly_chart(fig3, use_container_width=True, key="donut3")  # Ensure it fits within the column
+
+
         
 
 with col8:
