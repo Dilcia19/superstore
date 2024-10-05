@@ -11,7 +11,7 @@ import plotly.express as px
 import pandas as pd
 import numpy as np
 from superstore_analysis import profit_delta, repeat_customers, top_sub_categories_profit, top_sub_categories_sales
-from superstore_analysis import profits_by_state, sales_by_state
+from superstore_analysis import profits_by_state, sales_by_state, high_profit_products
 from state_abbrev import states_abbreviation
 
 #######################
@@ -195,46 +195,15 @@ with col6:
     # Display the map in Streamlit
     st.plotly_chart(map, key="map1")
 
-col7, col8, col9 = st.columns([1, 1, 2])
+col7, col8 = st.columns([2, 2])
 
 with col7:
     df = store_records[store_records['year'] == selected_year]
-    top_subs = top_sub_categories_profit(df)
-    top_subs = top_subs.rename(columns={'sub_category':'Sub-categories'})
-
-    # Create a bar chart with sorted bars
-    chart = alt.Chart(top_subs).mark_bar().encode(
-        x=alt.X('Sub-categories:N', sort='-y'),  # Sort x-axis based on y-values in descending order
-        y=alt.Y('profit:Q', title='Profit'),
-    ).properties(
-        width=alt.Step(80),
-        height=325,
-        title="Top 5 Sub-categories by Profit",   # Adjust bar width as needed
-        padding={"top": 0, "bottom": 0}  # Remove top and bottom padding
-    )
-
-    # Display the chart in Streamlit
-    st.altair_chart(chart, use_container_width=True)
-
+    high_profits = high_profit_products(df)
+    st.write("hello")
+    st.dataframe(high_profits)
 
 with col8:
-    df = store_records[store_records['year'] == selected_year]
-    top_subs_sales = top_sub_categories_sales(df)
-    top_subs_sales = top_subs_sales.rename(columns={'sub_category':'Sub-categories'})
-    # Create a bar chart with sorted bars
-    chart = alt.Chart(top_subs_sales).mark_bar().encode(
-        x=alt.X('Sub-categories:N', sort='-y'),  # Sort x-axis based on y-values in descending order
-        y=alt.Y('sales:Q', title='Sales'),
-    ).properties(
-        width=alt.Step(80),
-        height=325,
-        title="Top 5 Sub-categories by Sales",
-        padding={"top": 0, "bottom": 0}    # Adjust bar width as needed
-    )
-    # Display the chart in Streamlit
-    st.altair_chart(chart, use_container_width=True)
-
-with col9:
     df = store_records[store_records['year'] == selected_year]
     gp_states_sales = sales_by_state(df)
     gp_states_sales['state_abbrev'] = gp_states_sales['state'].map(states_abbreviation)

@@ -111,6 +111,17 @@ def sales_by_state(df_filtered):
     gp_states_sales = df_filtered[['state','sales']].groupby('state').agg({'sales':'sum'}).reset_index()
     return gp_states_sales
 
+def high_profit_products(df_filtered):
+    
+    high_profit_products = df_filtered[['product_id','product_name','profit','category']].groupby(['product_id']).agg({'profit':'sum','product_name':'first','category':'first'}).reset_index()
+    high_profit_products['profit'] = high_profit_products['profit'].round(1)
+    high_profit_products = high_profit_products.sort_values(by='profit', ascending=False)
+    top_5_high_profit = high_profit_products.iloc[0:5]
+    # high_profit_products = high_profit_products.rename(columns={'product_id':'Product ID','product_name':'Product Name','category':'Category','profit':'Profit'})
+    # high_profit_products['Profit'] = high_profit_products['Profit'].round(1)
+
+    return top_5_high_profit
+
 
 
 
