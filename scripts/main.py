@@ -37,11 +37,12 @@ with col2:
     st.metric(label="Sales % change,  2016-2017", value='{:,}'.format(sales_2017), delta=sales_pct_change_recent)
 
 with col3:
-    st.metric(label="% Repeat Customers", value=None, delta=repeat_order_pct)
+    st.metric(label="% Repeat Customers", value=f"{repeat_order_pct}%", delta=None)
 
 st.write("__________________________________________________________________")
 
-col4, col5, col6= st.columns(3)
+# col4, col5, col6= st.columns(3)
+col4, col5 = st.columns(2)
 
 with col4:
     df = store_records[store_records['year'] == selected_product]
@@ -66,15 +67,15 @@ with col5:
     )
     # Display the chart in Streamlit
     st.altair_chart(chart)
-with col6:
-    df = store_records[store_records['year'] == selected_product]
-    top_subs = top_sub_categories_profit(df)
-    # Create a bar chart
-    chart = alt.Chart(top_subs).mark_bar().encode(
-        x='sub_category',
-        y='profit'
-    )
-    # Display the chart in Streamlit
-    st.altair_chart(chart)
+# with col6:
+#     df = store_records[store_records['year'] == selected_product]
+#     top_subs = top_sub_categories_profit(df)
+#     # Create a bar chart
+#     chart = alt.Chart(top_subs).mark_bar().encode(
+#         x='sub_category',
+#         y='profit'
+#     )
+#     # Display the chart in Streamlit
+#     st.altair_chart(chart)
 
 st.write("__________________________________________________________________")
