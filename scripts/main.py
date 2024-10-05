@@ -11,7 +11,7 @@ import plotly.express as px
 import pandas as pd
 import numpy as np
 from superstore_analysis import profit_delta, repeat_customers, top_sub_categories_profit, top_sub_categories_sales
-from superstore_analysis import profits_by_state, sales_by_state, high_profit_categories, high_sales_categories, high_profit_segments
+from superstore_analysis import profits_by_state, sales_by_state, high_profit_categories, high_sales_categories, high_profit_segments, high_profit_products
 from state_abbrev import states_abbreviation
 
 #######################
@@ -105,9 +105,17 @@ st.write("\n")
 with st.sidebar:
     st.title("Superstore Dashboard")
     selected_year = st.sidebar.selectbox("Select Year:", np.sort(store_records["year"].unique()))
+    df = store_records[store_records['year'] == selected_year]
+    high_profit_products = high_profit_products(df)
     st.write("- The Super Store was founded at the end of 2013 and started selling products in 2014.")
-    st.write("- The store has seen year over year growth in terms of sales and profits.")
-    st.write("- With the elimination of a few key products and a few unprofitable geographical markets, we will set up the super store to break record profits and sales in the upcoming years.")
+    st.write("- The store has seen year over year growth in terms of sales and profits. With the elimination of a few key products and a few unprofitable geographical markets, we will set up the super store to break record profits and sales in the upcoming years.")
+    st.header(f"These five products brought in the most profit in {selected_year}")
+
+    for i in range(1, 6):
+        # Use markdown with HTML to color the profit in green
+        profit = high_profit_products.iloc[i-1]['profit']
+        product_name = high_profit_products.iloc[i-1]['product_name']
+        st.markdown(f"{i}: <span style='color:green;'>${profit}:</span> {product_name}", unsafe_allow_html=True)
     
     
 col1, col2, col3= st.columns(3)
@@ -175,10 +183,10 @@ with col6:
     gp_states_profit = profits_by_state(df)
     gp_states_profit['state_abbrev'] = gp_states_profit['state'].map(states_abbreviation)
 
-    # Create a custom color scale: red for negative profits, blue for positive profits
-    color_scale = [[0, 'red'], [0.5, 'lightgray'], [1, 'blue']]  # Adjust lightgray for profits near zero
+    # Set the color scale to ensure the color changes exactly at zero
+    color_scale = [[0, 'red'], [0.5, 'lightgray'], [1, 'blue']]
 
-    # Create a map
+    # Ensure color midpoint is exactly at zero
     map = px.choropleth(
         gp_states_profit,
         locations='state_abbrev',
@@ -186,7 +194,9 @@ with col6:
         color='profit',
         scope='usa',
         hover_name='state',
-        color_continuous_scale=color_scale
+        color_continuous_scale=color_scale,
+        range_color=[gp_states_profit['profit'].min(), gp_states_profit['profit'].max()],  # Range for the color scale
+        color_continuous_midpoint=0  # Set zero as the midpoint
     )
 
     # Update layout
@@ -194,6 +204,7 @@ with col6:
     
     # Display the map in Streamlit
     st.plotly_chart(map, key="map1")
+
 
 col7, col8 = st.columns([3, 2])
 

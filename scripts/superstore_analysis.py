@@ -118,10 +118,8 @@ def high_profit_products(df_filtered):
     high_profit_products = high_profit_products.sort_values(by='profit', ascending=False)
     high_profit_products['total_year_profit'] = high_profit_products['profit'].sum()
     high_profit_products['product_profit_pct'] = high_profit_products['profit'] / high_profit_products['total_year_profit']
+    high_profit_products = high_profit_products.drop(columns=['total_year_profit', 'product_profit_pct'])
     top_5_high_profit = high_profit_products.iloc[0:5]
-
-    # high_profit_products = high_profit_products.rename(columns={'product_id':'Product ID','product_name':'Product Name','category':'Category','profit':'Profit'})
-    # high_profit_products['Profit'] = high_profit_products['Profit'].round(1)
 
     return top_5_high_profit
 
