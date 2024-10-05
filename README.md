@@ -8,7 +8,7 @@
 
 ![Super Store Dashboard](data/superstore.png) 
 
-**KPIs: A Brief Look**
+**KPIs: A Brief Look**<br>
 If you've had a chance to poke around on the dashboard, you may notice a few things:
 1. Profits are increasing overall, but there are states that consistently underperform: Including but not limited to Texas and Illinois
 2. Copiers and Phones are consistently in the category of most profitable products
