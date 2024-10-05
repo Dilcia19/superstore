@@ -6,7 +6,7 @@
 
 **Super Store Dashboard**
 
-![Super Store Dashboard](https://github.com/jessicapeterson/superstore_analysis/blob/main/images/superstore_dashboard.png)
+![Super Store Dashboard](data/superstore.png)
 
 **KPIs Highlighted**
 
