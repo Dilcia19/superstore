@@ -1,7 +1,5 @@
 import pandas as pd
 
-
-
 def profit_delta(store_records):
 
     profit_delta = store_records[['order_id','profit','year']].groupby('year').agg({'profit':'sum','order_id':'first'}).reset_index()
@@ -82,6 +80,8 @@ def repeat_customers(store_records):
     not_first_order = number_of_repeat_orders - number_of_unique_customers
 
     return pct_repeated_orders, not_first_order
+
+
 
 
 

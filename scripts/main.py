@@ -8,6 +8,9 @@ from superstore_analysis import profit_delta, repeat_customers
 
 store_records = pd.read_csv('data/sample_superstore_updated.csv')
 
+st.markdown("<h1 style='text-align: center; color: dark-blue;'>Super Store Dashboard</h1>", unsafe_allow_html=True)
+st.write("\n")
+
 with st.sidebar:
     st.title("Superstore Dashboard")
     st.write("Navigation sidebar")
@@ -31,10 +34,12 @@ with col2:
 with col3:
     st.metric(label="% Repeat Customers", value=None, delta=repeat_order_pct)
 
+st.write("__________________________________________________________________")
+
 col4, col5, col6= st.columns(3)
 
 with col4:
-    st.metric(label="Not First Order %", value=None, delta=not_first_order)
+    st.metric(label="Not First Order %", value=None, delta=None)
 with col5:
     st.metric(label="Avg. Order Value", value=None, delta=None)
 with col6:
