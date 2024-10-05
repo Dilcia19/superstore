@@ -9,26 +9,22 @@ from superstore_analysis import profit_delta
 store_records = pd.read_csv('data/sample_superstore_updated.csv')
 
 
-col1, col2, col3, col4, col5 = st.columns(5)
+col1, col2, col3= st.columns(3)
 
 profit_delta_dict = profit_delta(store_records)
 
 with col1:
-    st.header("A cat")
-    st.image("https://static.streamlit.io/examples/cat.jpg")
+    st.write("profits, 2016-2017")
+    profits_2017 = profit_delta_dict['profits_2017']
+    profit_pct_change_recent = profit_delta_dict['profit_pct_change_recent']
+    st.metric(label="Profit % change recent", value=profits_2017, delta=profit_pct_change_recent)
+    
 
 with col2:
-    st.header("A dog")
-    st.image("https://static.streamlit.io/examples/dog.jpg")
+    st.write("sales, 2016-2017")
+    sales_2017 = profit_delta_dict['profits_2017']
+    sales_pct_change_recent = profit_delta_dict['sales_pct_change_recent']
+    st.metric(label="Profit % change recent", value=sales_2017, delta=sales_pct_change_recent)
 
 with col3:
     st.header("An owl")
-    st.image("https://static.streamlit.io/examples/owl.jpg")
-
-with col4:
-    st.header("An owl")
-    st.image("https://static.streamlit.io/examples/owl.jpg")
-
-with col5:
-    st.header("An owl")
-    st.image("https://static.streamlit.io/examples/owl.jpg")

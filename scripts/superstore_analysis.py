@@ -41,7 +41,9 @@ def profit_delta(store_records):
     sales_pct_change_recent = round(sales_pct_change_recent, 2)
 
     data_dict = {
+    'profits_2017':profits_2017,
     'profit_pct_change_recent':profit_pct_change_recent, 
+    'sales_2017':sales_2017,
     'sales_pct_change_recent':sales_pct_change_recent
     }
 
