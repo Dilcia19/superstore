@@ -50,16 +50,16 @@ st.markdown("""
         font-size: 1.8rem;
     }
     h1 {
-        margin-top: 0.5rem;
+        margin-top: 0.25rem;
         margin-bottom: 0rem;
-        font-size: 2.2rem;
+        font-size: 2.rem;
     }
     .stHorizontalBlock {
         padding-top: 0;
         padding-bottom: 0;
     }
     .block-container {
-        padding-top: 0;
+        padding-top: 10px;
         padding-bottom: 0;
     }
 
