@@ -89,20 +89,14 @@ gp_states_profit, gp_states_sales = profits_and_sales_by_state(store_records)
 gp_states_profit['state_abbrev'] = gp_states_profit['state'].map(states_abbreviation)
 gp_states_sales['state_abbrev'] = gp_states_sales['state'].map(states_abbreviation)
 
+map_data = gp_states_profit[['state_abbrev', 'profit']]
+
 left, right = st.columns(2)
 if left.button("Sales by State", use_container_width=True):
-    left.markdown("You clicked the sales by state button.")
-    print("You clicked the sales by state button.")
     # map gp_states_sales by us state and sales
-    st.write(gp_states_sales)
-    # Create a map
-    map_data = gp_states_sales[['state_abbrev', 'sales']]
-    view_state = pdk.ViewState(latitude=37.8, longitude=-96, zoom=3, pitch=0)
-    layer = pdk.Layer('ChoroplethLayer', data=map_data, get_fill_color='[0, sales/1000000, 0, 100]', get_line_color=[0, 0, 0], auto_highlight=True, get_line_width=200)
-    map = pdk.Deck(map_style='mapbox://styles/mapbox/light-v9', initial_view_state=view_state, layers=[layer])
-    st.pydeck_chart(map)
+   
     
 if right.button("Profits by State", use_container_width=True):
-    right.markdown("You clicked the profits by state button.")
-    print("You clicked the profits by state button.")
+    print('hello')
+ 
  
