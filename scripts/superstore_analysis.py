@@ -116,11 +116,36 @@ def high_profit_products(df_filtered):
     high_profit_products = df_filtered[['product_id','product_name','profit','category']].groupby(['product_id']).agg({'profit':'sum','product_name':'first','category':'first'}).reset_index()
     high_profit_products['profit'] = high_profit_products['profit'].round(1)
     high_profit_products = high_profit_products.sort_values(by='profit', ascending=False)
+    high_profit_products['total_year_profit'] = high_profit_products['profit'].sum()
+    high_profit_products['product_profit_pct'] = high_profit_products['profit'] / high_profit_products['total_year_profit']
     top_5_high_profit = high_profit_products.iloc[0:5]
+
     # high_profit_products = high_profit_products.rename(columns={'product_id':'Product ID','product_name':'Product Name','category':'Category','profit':'Profit'})
     # high_profit_products['Profit'] = high_profit_products['Profit'].round(1)
 
     return top_5_high_profit
+
+def high_profit_categories(df_filtered):
+    
+    high_profit_categories = df_filtered[['category','profit']].groupby('category').agg({'profit':'sum'}).reset_index()
+    high_profit_categories = high_profit_categories.sort_values(by='profit', ascending=False)
+    high_profit_categories['total_year_profit'] = high_profit_categories['profit'].sum()
+    high_profit_categories['category_profit_pct'] = (high_profit_categories['profit'] / high_profit_categories['total_year_profit']) * 100
+    high_profit_categories['category_profit_pct'] = high_profit_categories['category_profit_pct'].round(0)
+    top_5_high_profit_categories = high_profit_categories.iloc[0:5]
+
+    return top_5_high_profit_categories
+
+# def high_profit_categories(df_filtered):
+    
+#     high_sales_categories = df_filtered[['category','profit']].groupby('category').agg({'profit':'sum'}).reset_index()
+#     high_profit_categories = high_profit_categories.sort_values(by='profit', ascending=False)
+#     high_profit_categories['total_year_profit'] = high_profit_categories['profit'].sum()
+#     high_profit_categories['category_profit_pct'] = (high_profit_categories['profit'] / high_profit_categories['total_year_profit']) * 100
+#     high_profit_categories['category_profit_pct'] = high_profit_categories['category_profit_pct'].round(0)
+#     top_5_high_profit_categories = high_profit_categories.iloc[0:5]
+
+#     return top_5_high_profit_categories
 
 
 
