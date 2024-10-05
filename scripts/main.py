@@ -11,7 +11,7 @@ import plotly.express as px
 import pandas as pd
 import numpy as np
 from superstore_analysis import profit_delta, repeat_customers, top_sub_categories_profit, top_sub_categories_sales
-from superstore_analysis import profits_and_sales_by_state
+from superstore_analysis import profits_by_state, sales_by_state
 from state_abbrev import states_abbreviation
 
 #######################
@@ -171,7 +171,7 @@ with col5:
 
 with col6:
     df = store_records[store_records['year'] == selected_year]
-    gp_states_profit = profits_and_sales_by_state(df)
+    gp_states_profit = profits_by_state(df)
     gp_states_profit['state_abbrev'] = gp_states_profit['state'].map(states_abbreviation)
 
     # Create a custom color scale: red for negative profits, blue for positive profits
@@ -235,25 +235,25 @@ with col8:
 
 with col9:
     df = store_records[store_records['year'] == selected_year]
-    gp_states_profit = profits_and_sales_by_state(df)
-    gp_states_profit['state_abbrev'] = gp_states_profit['state'].map(states_abbreviation)
+    gp_states_sales = sales_by_state(df)
+    gp_states_sales['state_abbrev'] = gp_states_sales['state'].map(states_abbreviation)
 
     # Create a custom color scale: red for negative profits, blue for positive profits
-    color_scale = [[0, 'red'], [0.5, 'lightgray'], [1, 'blue']]  # Adjust lightgray for profits near zero
+    # color_scale = [[0, 'red'], [0.5, 'lightgray'], [1, 'blue']]  # Adjust lightgray for profits near zero
 
     # Create a map
     map2 = px.choropleth(
-        gp_states_profit,
+        gp_states_sales,
         locations='state_abbrev',
         locationmode='USA-states',
-        color='profit',
+        color='sales',
         scope='usa',
         hover_name='state',
-        color_continuous_scale=color_scale
+        color_continuous_scale='blues'
     )
 
     # Update layout
-    map2.update_layout(title_text="Profits by State", title_x=0.5, height=325)
+    map2.update_layout(title_text="Sales by State", title_x=0.5, height=325)
     
     # Display the map in Streamlit
     st.plotly_chart(map2, key="map2")
