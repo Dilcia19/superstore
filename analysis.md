@@ -37,3 +37,10 @@ Additional dashboard data points:
     - ✅ have a year/year chart of profitable product, popular product
         - I struggled with this one, we should work through it during our call
 
+
+# TODO:
+- refactor EDA code to make it more readable & add comments to the EDA code
+- refactor the functions I'm calling on in `superstore_analysis.py`
+- refactor the front-end code to be cleaner
+- update the readme with some code from the analysis
+
