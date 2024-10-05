@@ -131,7 +131,7 @@ with col3:
 
 st.markdown("<hr style='margin-top: 10px;'>", unsafe_allow_html=True)
 
-col4, col5, col6 = st.columns([1, 1, 2])
+col4, col5, col6 = st.columns([1.5, 1.5, 2])
 
 with col4:
     df = store_records[store_records['year'] == selected_year]
