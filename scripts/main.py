@@ -52,12 +52,14 @@ st.write("\n")
 with st.sidebar:
     st.title("Superstore Dashboard")
     st.write("The Super Store was founded at the end of 2013 and started selling products in 2014. The store has seen year over year growth in terms of sales and profits. With the elimination of a few key products, we will set up the super store to break record profits and sales in the upcoming years.")
-    selected_product = st.sidebar.selectbox("Select Year:", store_records["year"].unique())
+    selected_year = st.sidebar.selectbox("Select Year:", store_records["year"].unique())
 
 col1, col2, col3= st.columns(3)
 
 profit_delta_dict = profit_delta(store_records)
 repeat_order_pct, not_first_order = repeat_customers(store_records)
+gp_states_profit, gp_states_sales = profits_and_sales_by_state(store_records)
+
 
 with col1:
     profits_2017 = profit_delta_dict['profits_2017']
@@ -78,10 +80,10 @@ with col3:
 st.write("__________________________________________________________________")
 
 # col4, col5, col6= st.columns(3)
-col4, col5 = st.columns(2)
+col4, col5, col6 = st.columns(3)
 
 with col4:
-    df = store_records[store_records['year'] == selected_product]
+    df = store_records[store_records['year'] == selected_year]
     top_subs = top_sub_categories_profit(df)
 
     st.header("Top 5 Sub-categories by Profit")
@@ -100,7 +102,7 @@ with col4:
 
 
 with col5:
-    df = store_records[store_records['year'] == selected_product]
+    df = store_records[store_records['year'] == selected_year]
     top_subs_sales = top_sub_categories_sales(df)
     
     st.header("Top 5 Sub-categories by Sales")
@@ -115,19 +117,16 @@ with col5:
     # Display the chart in Streamlit
     st.altair_chart(chart, use_container_width=True)
 
+with col6:
+    df = store_records[store_records['year'] == selected_year]
+    st.write("hello")
+
+   
 
 
-    # # Create a bar chart
-    # chart = alt.Chart(top_subs_sales).mark_bar().encode(
-    #     x='sub_category',
-    #     y='sales'
-    # )
-    # # Display the chart in Streamlit
-    # st.altair_chart(chart, use_container_width=True)
 
 st.write("__________________________________________________________________")
 
-gp_states_profit, gp_states_sales = profits_and_sales_by_state(store_records)
 gp_states_profit['state_abbrev'] = gp_states_profit['state'].map(states_abbreviation)
 gp_states_sales['state_abbrev'] = gp_states_sales['state'].map(states_abbreviation)
 
