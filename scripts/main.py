@@ -11,7 +11,7 @@ import plotly.express as px
 import pandas as pd
 import numpy as np
 from superstore_analysis import profit_delta, repeat_customers, top_sub_categories_profit, top_sub_categories_sales
-from superstore_analysis import profits_by_state, sales_by_state, high_profit_products, high_profit_categories
+from superstore_analysis import profits_by_state, sales_by_state, high_profit_products, high_profit_categories, high_sales_categories
 from state_abbrev import states_abbreviation
 
 #######################
@@ -200,47 +200,39 @@ col7, col8 = st.columns([2, 2])
 with col7:
     df = store_records[store_records['year'] == selected_year]
     top_5_high_profit_categories = high_profit_categories(df)
-    # top_5_high_profit_categories is a df with columns 'category_profit_pct' and 'category'
-    # create a donut chart of the first row (most profitable category)
-
-    
+    top_5_high_sales_categories = high_sales_categories(df)
 
     col7_1, col7_2, col7_3 = st.columns([1, 1, 1])
-
+        
     with col7_1:
-        top_1_high_profit_categories = top_5_high_profit_categories.iloc[0:1]
-        category_name = top_1_high_profit_categories['category'].values[0]
-        category_profit_pct_value = top_1_high_profit_categories['category_profit_pct'].values[0]
 
-        remaining_value = 100 - category_profit_pct_value
         fig = px.pie(
-            names=[category_name, 'Other'],  # Use the category name and label the remaining portion as 'Other'
-            values=[category_profit_pct_value, remaining_value],  # Include both values
+            top_5_high_profit_categories,
+            values='category_profit_pct',
+            names='category',
             hole=0.6,
-            title=f"{category_name}",
-            width=325,
-            height=325
+            title="Category by Profit %",
+            width=300,
+            height=300
         )
         # Display the chart in Streamlit
         st.plotly_chart(fig, use_container_width=True, key="donut1")
 
     # Add content to the second column
     with col7_2:
-        top_2_high_profit_categories = top_5_high_profit_categories.iloc[1:2]
-        category_name = top_2_high_profit_categories['category'].values[0]
-        category_profit_pct_value = top_2_high_profit_categories['category_profit_pct'].values[0]
-        # Create a donut chart
-        remaining_value = 100 - category_profit_pct_value
+
         fig = px.pie(
-            names=[category_name, 'Other'],  # Use the category name and label the remaining portion as 'Other'
-            values=[category_profit_pct_value, remaining_value],  # Include both values
+            top_5_high_sales_categories,
+            values='category_sales_pct',
+            names='category',
             hole=0.6,
-            title=f"{category_name}",
-            width=325,
-            height=325
+            title="Category by Sales %",
+            width=300,
+            height=300
         )
         # Display the chart in Streamlit
         st.plotly_chart(fig, use_container_width=True, key="donut2")
+       
 
     # Add content to the third column
     with col7_3:
