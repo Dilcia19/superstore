@@ -81,7 +81,7 @@ def repeat_customers(store_records):
 
     return pct_repeated_orders, not_first_order
 
-def top_sub_categories(df_filtered):
+def top_sub_categories_profit(df_filtered):
 
     top_5_sub_category_year = df_filtered[['product_id', 'profit', 'product_name','category','sub_category']].groupby(['sub_category']).agg({'profit':'sum'}).rename(columns={'product_id':'product_id_count'}).sort_values(by='profit', ascending=False).reset_index()
     top_5_sub_category_year = top_5_sub_category_year[['sub_category', 'profit']]
@@ -89,6 +89,14 @@ def top_sub_categories(df_filtered):
 
 
     return top_5_sub_category_year
+
+def top_sub_categories_sales(df_filtered):
+
+    top_5_sub_category_syear = df_filtered[['product_id', 'sales', 'product_name','category','sub_category']].groupby(['sub_category']).agg({'sales':'sum'}).rename(columns={'product_id':'product_id_count'}).sort_values(by='sales', ascending=False).reset_index()
+    top_5_sub_category_syear = top_5_sub_category_syear[['sub_category', 'sales']]
+    top_5_sub_category_syear = top_5_sub_category_syear.iloc[0:5]
+
+    return top_5_sub_category_syear
 
 
 

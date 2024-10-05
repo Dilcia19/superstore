@@ -6,7 +6,7 @@ import streamlit as st
 import altair as alt
 
 import pandas as pd
-from superstore_analysis import profit_delta, repeat_customers, top_sub_categories
+from superstore_analysis import profit_delta, repeat_customers, top_sub_categories_profit, top_sub_categories_sales
 
 store_records = pd.read_csv('data/sample_superstore_updated.csv')
 
@@ -45,7 +45,7 @@ col4, col5, col6= st.columns(3)
 
 with col4:
     df = store_records[store_records['year'] == selected_product]
-    top_subs = top_sub_categories(df)
+    top_subs = top_sub_categories_profit(df)
 
     # Create a bar chart
     chart = alt.Chart(top_subs).mark_bar().encode(
@@ -57,18 +57,18 @@ with col4:
 
 with col5:
     df = store_records[store_records['year'] == selected_product]
-    top_subs = top_sub_categories(df)
+    top_subs_sales = top_sub_categories_sales(df)
     
     # Create a bar chart
-    chart = alt.Chart(top_subs).mark_bar().encode(
+    chart = alt.Chart(top_subs_sales).mark_bar().encode(
         x='sub_category',
-        y='profit'
+        y='sales'
     )
     # Display the chart in Streamlit
     st.altair_chart(chart)
 with col6:
     df = store_records[store_records['year'] == selected_product]
-    top_subs = top_sub_categories(df)
+    top_subs = top_sub_categories_profit(df)
     # Create a bar chart
     chart = alt.Chart(top_subs).mark_bar().encode(
         x='sub_category',
