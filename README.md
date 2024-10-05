@@ -4,6 +4,10 @@
 - The store has seen year over year growth in terms of sales and profits. 
 - With the elimination of a few key products and a few unprofitable geographical markets, we will set up the super store to break record profits and sales in the upcoming years
 
+**Super Store Dashboard**
+
+![Super Store Dashboard](https://github.com/jessicapeterson/superstore_analysis/blob/main/images/superstore_dashboard.png)
+
 **KPIs Highlighted**
 
 In the dashboard, we chose to highlight the following:
