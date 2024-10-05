@@ -201,6 +201,7 @@ with col7:
     df = store_records[store_records['year'] == selected_year]
     top_5_high_profit_categories = high_profit_categories(df)
     top_5_high_sales_categories = high_sales_categories(df)
+    top_5_profit_products = high_profit_products(df)
 
     col7_1, col7_2, col7_3 = st.columns([1, 1, 1])
         
@@ -236,21 +237,13 @@ with col7:
 
     # Add content to the third column
     with col7_3:
-        top_3_high_profit_categories = top_5_high_profit_categories.iloc[2:3]
-        category_name = top_3_high_profit_categories['category'].values[0]
-        category_profit_pct_value = top_3_high_profit_categories['category_profit_pct'].values[0]
-        # Create a donut chart
-        remaining_value = 100 - category_profit_pct_value
-        fig = px.pie(
-            names=[category_name, 'Other'],  # Use the category name and label the remaining portion as 'Other'
-            values=[category_profit_pct_value, remaining_value],  # Include both values
-            hole=0.6,
-            title=f"{category_name}",
-            width=325,
-            height=325
-        )
-        # Display the chart in Streamlit
-        st.plotly_chart(fig, use_container_width=True, key="donut3")
+
+        # profits should be charted on the x-axis, product_name on the y-axis
+        # title should be 'Top 5 Products by Profit'
+        fig = px.bar(top_5_profit_products, x='profit', y='product_name', title='Top 5 Products by Profit')
+        st.plotly_chart(fig, use_container_width=True, key="bar1")
+
+        
 
 with col8:
     df = store_records[store_records['year'] == selected_year]
