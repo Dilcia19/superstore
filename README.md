@@ -6,23 +6,12 @@
 
 **Super Store Dashboard**
 
-![Super Store Dashboard](data/superstore.png)
+![Super Store Dashboard](data/superstore.png) 
 
-**KPIs Highlighted**
-
-In the dashboard, we chose to highlight the following:
-- the % increase in profits and sales from 2016 to 2017
-- the % of repeat customers total
-
-In charts:
-- the top sub-categories of products that generate the most profit
-- the top sub-categories of products that generate the most sales revenue
-
-In maps:
-- Profits by state
-- Sales by state
-
-In donut charts:
-- Profits by category
-- Sales by category
-- Profits by segment
+**KPIs: A Brief Look**
+If you've had a chance to poke around on the dashboard, you may notice a few things:
+- 1. Profits are increasing overall, but there are states that consistently underperform: Including but not limited to Texas and Illinois
+- 2. Copiers and Phones are consistently in the category of most profitable products
+- 3. From the 3 catetories: Technology, Furniture, and Office Supplies - when compared by % of profit they brought each year, Furniture consistently brings in a smaller piece of the pie than the rest
+- 4. Considering that sub-categories within Furniture are rarely in the top 5 most profitable products, or top 5 products with the highest sales revenue, it may be worth re-evaluating if the store needs to sell furniture at all  
+- 5. The data is full of surprises, what will you find?
