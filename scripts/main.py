@@ -21,6 +21,29 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded")
 
+st.markdown("""
+<style>
+.stMetric {
+    text-align: center;
+}
+.stMetric > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+.stMetric label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 50px;  /* Adjust this value as needed */
+}
+</style>
+""", unsafe_allow_html=True)
+
+
 store_records = pd.read_csv('data/sample_superstore_updated.csv')
 
 st.markdown("<h1 style='text-align: center; color: dark-blue;'>Super Store Dashboard</h1>", unsafe_allow_html=True)
@@ -89,14 +112,10 @@ gp_states_profit, gp_states_sales = profits_and_sales_by_state(store_records)
 gp_states_profit['state_abbrev'] = gp_states_profit['state'].map(states_abbreviation)
 gp_states_sales['state_abbrev'] = gp_states_sales['state'].map(states_abbreviation)
 
-map_data = gp_states_profit[['state_abbrev', 'profit']]
 
-left, right = st.columns(2)
-if left.button("Sales by State", use_container_width=True):
-    # map gp_states_sales by us state and sales
-   
+
+
     
-if right.button("Profits by State", use_container_width=True):
-    print('hello')
+
  
  
