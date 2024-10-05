@@ -9,6 +9,7 @@ import plotly.express as px
 
 
 import pandas as pd
+import numpy as np
 from superstore_analysis import profit_delta, repeat_customers, top_sub_categories_profit, top_sub_categories_sales
 from superstore_analysis import profits_and_sales_by_state
 from state_abbrev import states_abbreviation
@@ -64,7 +65,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 
-store_records = pd.read_csv('data/sample_superstore_updated.csv')
+store_records = pd.read_csv('data/sample_superstore_updated.csv', dtype={'year':int})
 
 st.markdown("<h1 style='text-align: center; color: dark-blue;'>Super Store Dashboard</h1>", unsafe_allow_html=True)
 st.write("\n")
@@ -72,7 +73,10 @@ st.write("\n")
 with st.sidebar:
     st.title("Superstore Dashboard")
     st.write("The Super Store was founded at the end of 2013 and started selling products in 2014. The store has seen year over year growth in terms of sales and profits. With the elimination of a few key products, we will set up the super store to break record profits and sales in the upcoming years.")
-    selected_year = st.sidebar.selectbox("Select Year:", store_records["year"].unique())
+    # selected_year = st.sidebar.selectbox("Select Year:", store_records["year"].unique())
+    selected_year = st.sidebar.selectbox("Select Year:", np.sort(store_records["year"].unique()))
+    
+
 
 col1, col2, col3= st.columns(3)
 
@@ -112,7 +116,6 @@ with col4:
     chart = alt.Chart(top_subs).mark_bar().encode(
         x=alt.X('sub_category:N', sort='-y'),  # Sort x-axis based on y-values in descending order
         y=alt.Y('profit:Q', title='Profit'),
-        # color=alt.Color('sub_category:N', legend=None)  # Optional: color bars by sub-category
     ).properties(
         width=alt.Step(80)  # Adjust bar width as needed
     )
@@ -145,12 +148,6 @@ with col6:
     # Create a map
     map = px.choropleth(gp_states_profit, locations='state_abbrev', locationmode='USA-states', color='profit', scope='usa', hover_name='state', color_continuous_scale='Viridis')
     st.plotly_chart(map)
-  
-
-# with col6:  
-#     st.write("hello")
-
-
 
 st.write("__________________________________________________________________")
 
