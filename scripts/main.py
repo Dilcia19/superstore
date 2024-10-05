@@ -127,8 +127,6 @@ with col3:
 
 st.markdown("<hr style='margin-top: 10px;'>", unsafe_allow_html=True)
 
-# col4, col5, col6= st.columns(3)
-# col4, col5, col6 = st.columns(3)
 col4, col5, col6 = st.columns([1, 1, 2])
 
 with col4:
