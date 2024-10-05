@@ -106,7 +106,7 @@ with st.sidebar:
     st.title("Superstore Dashboard")
     st.write("- The Super Store was founded at the end of 2013 and started selling products in 2014.")
     st.write("- The store has seen year over year growth in terms of sales and profits.")
-    st.write("- With the elimination of a few key products, we will set up the super store to break record profits and sales in the upcoming years.")
+    st.write("- With the elimination of a few key products and a few unprofitable geographical markets, we will set up the super store to break record profits and sales in the upcoming years.")
     selected_year = st.sidebar.selectbox("Select Year:", np.sort(store_records["year"].unique()))
     
 col1, col2, col3= st.columns(3)
