@@ -56,9 +56,10 @@ st.markdown("""
     }
     .stHorizontalBlock {
         padding-top: 0;
+        padding-bottom: 0;
     }
     .block-container {
-        padding-top: 0.5rem;
+        padding-top: 0;
         padding-bottom: 0;
     }
 
@@ -136,14 +137,15 @@ with col4:
     top_subs = top_sub_categories_profit(df)
     top_subs = top_subs.rename(columns={'sub_category':'Sub-categories'})
 
-
     # Create a bar chart with sorted bars
     chart = alt.Chart(top_subs).mark_bar().encode(
         x=alt.X('Sub-categories:N', sort='-y'),  # Sort x-axis based on y-values in descending order
         y=alt.Y('profit:Q', title='Profit'),
     ).properties(
         width=alt.Step(80),
-        title="Top 5 Sub-categories by Profit"   # Adjust bar width as needed
+        height=325,
+        title="Top 5 Sub-categories by Profit",   # Adjust bar width as needed
+        padding={"top": 0, "bottom": 0}  # Remove top and bottom padding
     )
 
     # Display the chart in Streamlit
@@ -160,7 +162,9 @@ with col5:
         y=alt.Y('sales:Q', title='Sales'),
     ).properties(
         width=alt.Step(80),
-        title="Top 5 Sub-categories by Sales"   # Adjust bar width as needed
+        height=325,
+        title="Top 5 Sub-categories by Sales",
+        padding={"top": 0, "bottom": 0}    # Adjust bar width as needed
     )
     # Display the chart in Streamlit
     st.altair_chart(chart, use_container_width=True)
@@ -185,7 +189,7 @@ with col6:
     )
 
     # Update layout
-    map.update_layout(title_text="Profits by State", title_x=0.5)
+    map.update_layout(title_text="Profits by State", title_x=0.5, height=325)
     
     # Display the map in Streamlit
     st.plotly_chart(map, key="map1")
@@ -197,14 +201,15 @@ with col7:
     top_subs = top_sub_categories_profit(df)
     top_subs = top_subs.rename(columns={'sub_category':'Sub-categories'})
 
-
     # Create a bar chart with sorted bars
     chart = alt.Chart(top_subs).mark_bar().encode(
         x=alt.X('Sub-categories:N', sort='-y'),  # Sort x-axis based on y-values in descending order
         y=alt.Y('profit:Q', title='Profit'),
     ).properties(
         width=alt.Step(80),
-        title="Top 5 Sub-categories by Profit"   # Adjust bar width as needed
+        height=325,
+        title="Top 5 Sub-categories by Profit",   # Adjust bar width as needed
+        padding={"top": 0, "bottom": 0}  # Remove top and bottom padding
     )
 
     # Display the chart in Streamlit
@@ -221,7 +226,9 @@ with col8:
         y=alt.Y('sales:Q', title='Sales'),
     ).properties(
         width=alt.Step(80),
-        title="Top 5 Sub-categories by Sales"   # Adjust bar width as needed
+        height=325,
+        title="Top 5 Sub-categories by Sales",
+        padding={"top": 0, "bottom": 0}    # Adjust bar width as needed
     )
     # Display the chart in Streamlit
     st.altair_chart(chart, use_container_width=True)
@@ -246,7 +253,7 @@ with col9:
     )
 
     # Update layout
-    map2.update_layout(title_text="Profits by State", title_x=0.5)
+    map2.update_layout(title_text="Profits by State", title_x=0.5, height=325)
     
     # Display the map in Streamlit
     st.plotly_chart(map2, key="map2")
