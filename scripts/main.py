@@ -3,8 +3,10 @@ Streamlit app for Superstore Dashboard
 """
 
 import streamlit as st
+import altair as alt
+
 import pandas as pd
-from superstore_analysis import profit_delta, repeat_customers
+from superstore_analysis import profit_delta, repeat_customers, top_sub_categories
 
 store_records = pd.read_csv('data/sample_superstore_updated.csv')
 
@@ -14,6 +16,7 @@ st.write("\n")
 with st.sidebar:
     st.title("Superstore Dashboard")
     st.write("Navigation sidebar")
+    selected_product = st.sidebar.selectbox("Select Year:", store_records["year"].unique())
 
 col1, col2, col3= st.columns(3)
 
@@ -41,8 +44,37 @@ st.write("__________________________________________________________________")
 col4, col5, col6= st.columns(3)
 
 with col4:
-    st.metric(label="Not First Order %", value=None, delta=None)
+    df = store_records[store_records['year'] == selected_product]
+    top_subs = top_sub_categories(df)
+
+    # Create a bar chart
+    chart = alt.Chart(top_subs).mark_bar().encode(
+        x='sub_category',
+        y='profit'
+    )
+    # Display the chart in Streamlit
+    st.altair_chart(chart)
+
 with col5:
-    st.metric(label="Avg. Order Value", value=None, delta=None)
+    df = store_records[store_records['year'] == selected_product]
+    top_subs = top_sub_categories(df)
+    
+    # Create a bar chart
+    chart = alt.Chart(top_subs).mark_bar().encode(
+        x='sub_category',
+        y='profit'
+    )
+    # Display the chart in Streamlit
+    st.altair_chart(chart)
 with col6:
-    st.metric(label="Avg. Order Value", value=None, delta=None)
+    df = store_records[store_records['year'] == selected_product]
+    top_subs = top_sub_categories(df)
+    # Create a bar chart
+    chart = alt.Chart(top_subs).mark_bar().encode(
+        x='sub_category',
+        y='profit'
+    )
+    # Display the chart in Streamlit
+    st.altair_chart(chart)
+
+st.write("__________________________________________________________________")
