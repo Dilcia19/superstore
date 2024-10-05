@@ -166,17 +166,30 @@ with col6:
     df = store_records[store_records['year'] == selected_year]
     gp_states_profit = profits_and_sales_by_state(df)
     gp_states_profit['state_abbrev'] = gp_states_profit['state'].map(states_abbreviation)
+
+    # Create a custom color scale: red for negative profits, blue for positive profits
+    color_scale = [[0, 'red'], [0.5, 'lightgray'], [1, 'blue']]  # Adjust lightgray for profits near zero
+
     # Create a map
-    map = px.choropleth(gp_states_profit, 
-                        locations='state_abbrev', 
-                        locationmode='USA-states', 
-                        color='profit', scope='usa', 
-                        hover_name='state', 
-                        color_continuous_scale='Blues')
+    map = px.choropleth(
+        gp_states_profit,
+        locations='state_abbrev',
+        locationmode='USA-states',
+        color='profit',
+        scope='usa',
+        hover_name='state',
+        color_continuous_scale=color_scale
+    )
+
+    # Update layout
     map.update_layout(title_text="Profits by State", title_x=0.5)
+    
+    # Display the map in Streamlit
     st.plotly_chart(map)
 
-st.write("__________________________________________________________________")
+
+
+
 
 
 
