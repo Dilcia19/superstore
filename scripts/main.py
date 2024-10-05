@@ -58,7 +58,6 @@ col1, col2, col3= st.columns(3)
 
 profit_delta_dict = profit_delta(store_records)
 repeat_order_pct, not_first_order = repeat_customers(store_records)
-gp_states_profit, gp_states_sales = profits_and_sales_by_state(store_records)
 
 
 with col1:
@@ -80,7 +79,8 @@ with col3:
 st.write("__________________________________________________________________")
 
 # col4, col5, col6= st.columns(3)
-col4, col5, col6 = st.columns(3)
+# col4, col5, col6 = st.columns(3)
+col4, col5, col6 = st.columns([1, 1, 2])
 
 with col4:
     df = store_records[store_records['year'] == selected_year]
@@ -110,7 +110,6 @@ with col5:
     chart = alt.Chart(top_subs_sales).mark_bar().encode(
         x=alt.X('sub_category:N', sort='-y'),  # Sort x-axis based on y-values in descending order
         y=alt.Y('sales:Q', title='Sales'),
-        # color=alt.Color('sub_category:N', legend=None)  # Optional: color bars by sub-category
     ).properties(
         width=alt.Step(80)  # Adjust bar width as needed
     )
@@ -119,16 +118,22 @@ with col5:
 
 with col6:
     df = store_records[store_records['year'] == selected_year]
-    st.write("hello")
+    gp_states_profit = profits_and_sales_by_state(df)
+    gp_states_profit['state_abbrev'] = gp_states_profit['state'].map(states_abbreviation)
+    # create altair map
+    st.header("Profits by State")
+    # Create a map
+    map = px.choropleth(gp_states_profit, locations='state_abbrev', locationmode='USA-states', color='profit', scope='usa', hover_name='state', color_continuous_scale='Viridis')
+    st.plotly_chart(map)
+  
 
-   
+# with col6:  
+#     st.write("hello")
 
 
 
 st.write("__________________________________________________________________")
 
-gp_states_profit['state_abbrev'] = gp_states_profit['state'].map(states_abbreviation)
-gp_states_sales['state_abbrev'] = gp_states_sales['state'].map(states_abbreviation)
 
 
 

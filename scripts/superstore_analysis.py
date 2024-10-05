@@ -101,12 +101,13 @@ def top_sub_categories_sales(df_filtered):
     return top_5_sub_category_syear
 
 
-def profits_and_sales_by_state(store_records):
+def profits_and_sales_by_state(df_filtered):
 
-    gp_states_profit = store_records[['state','profit']].groupby('state').agg({'profit':'sum'}).reset_index()
-    gp_states_sales = store_records[['state','sales']].groupby('state').agg({'sales':'sum'}).reset_index()
+    gp_states_profit = df_filtered[['state','profit']].groupby('state').agg({'profit':'sum'}).reset_index()
+    # gp_states_sales = store_records[['state','sales']].groupby('state').agg({'sales':'sum'}).reset_index()
 
-    return gp_states_profit, gp_states_sales
+    #return gp_states_profit, gp_states_sales
+    return gp_states_profit
 
 
 
