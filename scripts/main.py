@@ -85,26 +85,45 @@ with col4:
     top_subs = top_sub_categories_profit(df)
 
     st.header("Top 5 Sub-categories by Profit")
-    # Create a bar chart
+
+    # Create a bar chart with sorted bars
     chart = alt.Chart(top_subs).mark_bar().encode(
-        x='sub_category',
-        y='profit'
+        x=alt.X('sub_category:N', sort='-y'),  # Sort x-axis based on y-values in descending order
+        y=alt.Y('profit:Q', title='Profit'),
+        # color=alt.Color('sub_category:N', legend=None)  # Optional: color bars by sub-category
+    ).properties(
+        width=alt.Step(80)  # Adjust bar width as needed
     )
+
     # Display the chart in Streamlit
     st.altair_chart(chart, use_container_width=True)
+
 
 with col5:
     df = store_records[store_records['year'] == selected_product]
     top_subs_sales = top_sub_categories_sales(df)
     
     st.header("Top 5 Sub-categories by Sales")
-    # Create a bar chart
+    # Create a bar chart with sorted bars
     chart = alt.Chart(top_subs_sales).mark_bar().encode(
-        x='sub_category',
-        y='sales'
+        x=alt.X('sub_category:N', sort='-y'),  # Sort x-axis based on y-values in descending order
+        y=alt.Y('sales:Q', title='Sales'),
+        # color=alt.Color('sub_category:N', legend=None)  # Optional: color bars by sub-category
+    ).properties(
+        width=alt.Step(80)  # Adjust bar width as needed
     )
     # Display the chart in Streamlit
     st.altair_chart(chart, use_container_width=True)
+
+
+
+    # # Create a bar chart
+    # chart = alt.Chart(top_subs_sales).mark_bar().encode(
+    #     x='sub_category',
+    #     y='sales'
+    # )
+    # # Display the chart in Streamlit
+    # st.altair_chart(chart, use_container_width=True)
 
 st.write("__________________________________________________________________")
 
