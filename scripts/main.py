@@ -4,7 +4,7 @@ Streamlit app for Superstore Dashboard
 
 import streamlit as st
 import pandas as pd
-from superstore_analysis import profit_delta
+from superstore_analysis import profit_delta, repeat_customers
 
 store_records = pd.read_csv('data/sample_superstore_updated.csv')
 
@@ -12,6 +12,7 @@ store_records = pd.read_csv('data/sample_superstore_updated.csv')
 col1, col2, col3= st.columns(3)
 
 profit_delta_dict = profit_delta(store_records)
+repeat_order_pct, not_first_order = repeat_customers(store_records)
 
 with col1:
     profits_2017 = profit_delta_dict['profits_2017']
@@ -25,4 +26,4 @@ with col2:
     st.metric(label="Sales % change,  2016-2017", value=sales_2017, delta=sales_pct_change_recent)
 
 with col3:
-    st.write("test, 2016-2017")
+    st.metric(label="% Repeat Customers", value=None, delta=repeat_order_pct)
