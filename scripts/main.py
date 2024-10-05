@@ -16,30 +16,50 @@ from state_abbrev import states_abbreviation
 #######################
 # Page configuration
 st.set_page_config(
-    page_title="US Population Dashboard",
+    page_title="Superstore Dashboard",
     page_icon="🔥",
     layout="wide",
     initial_sidebar_state="expanded")
 
+# Custom CSS to reduce spacing and center content
 st.markdown("""
 <style>
-.stMetric {
-    text-align: center;
-}
-.stMetric > div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-}
-.stMetric label {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    min-height: 50px;  /* Adjust this value as needed */
-}
+    .main > div {
+        padding-top: 0rem;
+    }
+    .stMetric {
+        text-align: center;
+    }
+    .stMetric > div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 0.5rem 0;
+    }
+    .stMetric label {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        min-height: 20px;
+        font-size: 0.9em;
+    }
+    .stMetric .css-1wivap2 {
+        font-size: 1.8rem;
+    }
+    h1 {
+        margin-top: 0.5rem;
+        margin-bottom: 0rem;
+        font-size: 2.2rem;
+    }
+    .stHorizontalBlock {
+        padding-top: 0;
+    }
+    .block-container {
+        padding-top: 0.5rem;
+        padding-bottom: 0;
+    }
 </style>
 """, unsafe_allow_html=True)
 
