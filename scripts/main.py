@@ -213,12 +213,12 @@ with col7:
             hole=0.6,
             title="Category by Profit %"
         )
-        # Update layout to adjust legend and prevent cut-off
-        fig1.update_traces(textinfo='percent+label')  # Show percentages and labels
-        fig1.update_layout(legend=dict(font=dict(size=10)), title_font_size=14)  # Adjust legend and title font size
-        st.plotly_chart(fig1, use_container_width=True, key="donut1")  # Ensure it fits within the column
+        # Show only percentages
+        fig1.update_traces(textinfo='percent')
+        fig1.update_layout(legend=dict(font=dict(size=10)), title_font_size=14)
+        st.plotly_chart(fig1, use_container_width=True, key="donut1")
 
-    with col7_2:
+    with col7_2:s
         fig2 = px.pie(
             top_5_high_sales_categories,
             values='category_sales_pct',
@@ -226,10 +226,10 @@ with col7:
             hole=0.6,
             title="Category by Sales %"
         )
-        # Update layout to adjust legend and prevent cut-off
-        fig2.update_traces(textinfo='percent+label')  # Show percentages and labels
-        fig2.update_layout(legend=dict(font=dict(size=10)), title_font_size=14)  # Adjust legend and title font size
-        st.plotly_chart(fig2, use_container_width=True, key="donut2")  # Ensure it fits within the column
+        # Show only percentages
+        fig2.update_traces(textinfo='percent')
+        fig2.update_layout(legend=dict(font=dict(size=10)), title_font_size=14)
+        st.plotly_chart(fig2, use_container_width=True, key="donut2")
 
     with col7_3:
         fig3 = px.pie(
@@ -239,10 +239,11 @@ with col7:
             hole=0.6,
             title="Segment by Profit %"
         )
-        # Update layout to adjust legend and prevent cut-off
-        fig3.update_traces(textinfo='percent+label')  # Show percentages and labels
-        fig3.update_layout(legend=dict(font=dict(size=10)), title_font_size=14)  # Adjust legend and title font size
-        st.plotly_chart(fig3, use_container_width=True, key="donut3")  # Ensure it fits within the column
+        # Show only percentages
+        fig3.update_traces(textinfo='percent')
+        fig3.update_layout(legend=dict(font=dict(size=10)), title_font_size=14)
+        st.plotly_chart(fig3, use_container_width=True, key="donut3")
+
 
 
         
