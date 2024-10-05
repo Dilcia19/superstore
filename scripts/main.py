@@ -195,7 +195,7 @@ with col6:
     # Display the map in Streamlit
     st.plotly_chart(map, key="map1")
 
-col7, col8 = st.columns([2, 2])
+col7, col8 = st.columns([3, 2])
 
 with col7:
     df = store_records[store_records['year'] == selected_year]
@@ -215,10 +215,15 @@ with col7:
         )
         # Show only percentages
         fig1.update_traces(textinfo='percent')
-        fig1.update_layout(legend=dict(font=dict(size=10)), title_font_size=14)
+        fig1.update_layout(
+            legend=dict(font=dict(size=8)),  # Smaller legend font size
+            title_font_size=14,
+            width=350,  # Slightly bigger width
+            height=350  # Slightly bigger height
+        )
         st.plotly_chart(fig1, use_container_width=True, key="donut1")
 
-    with col7_2:s
+    with col7_2:
         fig2 = px.pie(
             top_5_high_sales_categories,
             values='category_sales_pct',
@@ -228,7 +233,12 @@ with col7:
         )
         # Show only percentages
         fig2.update_traces(textinfo='percent')
-        fig2.update_layout(legend=dict(font=dict(size=10)), title_font_size=14)
+        fig2.update_layout(
+            legend=dict(font=dict(size=8)),  # Smaller legend font size
+            title_font_size=14,
+            width=350,  # Slightly bigger width
+            height=350  # Slightly bigger height
+        )
         st.plotly_chart(fig2, use_container_width=True, key="donut2")
 
     with col7_3:
@@ -241,8 +251,14 @@ with col7:
         )
         # Show only percentages
         fig3.update_traces(textinfo='percent')
-        fig3.update_layout(legend=dict(font=dict(size=10)), title_font_size=14)
+        fig3.update_layout(
+            legend=dict(font=dict(size=8)),  # Smaller legend font size
+            title_font_size=14,
+            width=350,  # Slightly bigger width
+            height=350  # Slightly bigger height
+        )
         st.plotly_chart(fig3, use_container_width=True, key="donut3")
+
 
 
 
