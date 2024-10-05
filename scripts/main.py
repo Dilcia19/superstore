@@ -134,10 +134,12 @@ col4, col5, col6 = st.columns([1, 1, 2])
 with col4:
     df = store_records[store_records['year'] == selected_year]
     top_subs = top_sub_categories_profit(df)
+    top_subs = top_subs.rename(columns={'sub_category':'Sub-categories'})
+
 
     # Create a bar chart with sorted bars
     chart = alt.Chart(top_subs).mark_bar().encode(
-        x=alt.X('sub_category:N', sort='-y'),  # Sort x-axis based on y-values in descending order
+        x=alt.X('Sub-categories:N', sort='-y'),  # Sort x-axis based on y-values in descending order
         y=alt.Y('profit:Q', title='Profit'),
     ).properties(
         width=alt.Step(80),
@@ -151,9 +153,10 @@ with col4:
 with col5:
     df = store_records[store_records['year'] == selected_year]
     top_subs_sales = top_sub_categories_sales(df)
+    top_subs_sales = top_subs_sales.rename(columns={'sub_category':'Sub-categories'})
     # Create a bar chart with sorted bars
     chart = alt.Chart(top_subs_sales).mark_bar().encode(
-        x=alt.X('sub_category:N', sort='-y'),  # Sort x-axis based on y-values in descending order
+        x=alt.X('Sub-categories:N', sort='-y'),  # Sort x-axis based on y-values in descending order
         y=alt.Y('sales:Q', title='Sales'),
     ).properties(
         width=alt.Step(80),
