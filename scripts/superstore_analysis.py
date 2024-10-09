@@ -85,7 +85,6 @@ def repeat_customers(store_records):
     )
 
     # and 772 repeat customers who have purchased from the store more than once
-    # retention_rate_pv = retention_rate_pv.fillna(0)
     retention_rate_pv['single_purchase_customer'] = retention_rate_pv[retention_rate_pv == 0].count(axis=1).gt(2)
     repeat_customers = retention_rate_pv[retention_rate_pv['single_purchase_customer'] == False]
 
