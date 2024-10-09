@@ -156,7 +156,8 @@ with col4:
     # Create a bar chart with sorted bars
     chart = alt.Chart(top_subs).mark_bar().encode(
         x=alt.X('Sub-categories:N', sort='-y'),  # Sort x-axis based on y-values in descending order
-        y=alt.Y('profit:Q', title='Profit'),
+        y=alt.Y('profit:Q', title='Profit', axis=alt.Axis(format=',d')),
+        tooltip=alt.Tooltip('profit:Q', format=',')
     ).properties(
         width=alt.Step(80),
         height=325,
@@ -175,7 +176,8 @@ with col5:
     # Create a bar chart with sorted bars
     chart = alt.Chart(top_subs_sales).mark_bar().encode(
         x=alt.X('Sub-categories:N', sort='-y'),  # Sort x-axis based on y-values in descending order
-        y=alt.Y('sales:Q', title='Sales'),
+        y=alt.Y('sales:Q', title='Sales', axis=alt.Axis(format=',d')),
+        tooltip=alt.Tooltip('sales:Q', format=',')
     ).properties(
         width=alt.Step(80),
         height=325,
