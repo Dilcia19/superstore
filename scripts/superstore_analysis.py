@@ -63,12 +63,30 @@ def profit_delta(store_records):
 def repeat_customers(store_records):
     # retention rate - ie, how many of those customers have come back
     # we have about 300 repeat customers that purchase every year out of 793 unique customers
-    retention_rate = store_records[['customer_id','year','product_id']].groupby(['year','customer_id']).agg('count').reset_index()
-    retention_rate_pv = pd.pivot(retention_rate, index='customer_id', columns='year', values='product_id').reset_index()
-    retention_rate_pv2 = retention_rate_pv.dropna(axis=0)
+
+    retention_rate = (
+        store_records
+        .filter(['order_id', 'customer_id', 'year'])
+        .groupby(['customer_id', 'year'])
+        .agg(
+            {'order_id':'count'}
+        )
+        .reset_index()
+    )
+
+    retention_rate_pv = (
+        retention_rate
+        .pivot(
+            index='customer_id', 
+            columns='year', 
+            values='order_id')
+        .reset_index()
+        .dropna(axis=0)
+        .fillna(0)
+    )
 
     # and 772 repeat customers who have purchased from the store more than once
-    retention_rate_pv = retention_rate_pv.fillna(0)
+    # retention_rate_pv = retention_rate_pv.fillna(0)
     retention_rate_pv['single_purchase_customer'] = retention_rate_pv[retention_rate_pv == 0].count(axis=1).gt(2)
     repeat_customers = retention_rate_pv[retention_rate_pv['single_purchase_customer'] == False]
 
@@ -99,7 +117,6 @@ def top_sub_categories_profit(df_filtered):
     top_5_sub_category_year = top_5_sub_category_year[['sub_category', 'profit']]
     top_5_sub_category_year['profit'] = top_5_sub_category_year['profit'].round(0)
     top_5_sub_category_year = top_5_sub_category_year.iloc[0:5]
-
 
     return top_5_sub_category_year
 
