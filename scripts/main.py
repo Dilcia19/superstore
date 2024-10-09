@@ -10,8 +10,7 @@ import plotly.express as px
 
 import pandas as pd
 import numpy as np
-from superstore_analysis import profit_delta, repeat_customers, top_sub_categories_profit, top_sub_categories_sales
-from superstore_analysis import profits_by_state, sales_by_state, high_profit_categories, high_sales_categories, high_profit_segments, high_profit_products
+from superstore_analysis import *
 from state_abbrev import states_abbreviation
 
 #######################
