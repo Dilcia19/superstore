@@ -115,7 +115,7 @@ def sales_by_state(df_filtered):
 
 def high_profit_products(df_filtered):
     
-    high_profit_products = df_filtered[['product_id','product_name','profit','category']].groupby(['product_id']).agg({'profit':'sum','product_name':'first','category':'first'}).reset_index()
+    high_profit_products = df_filtered[['product_id','product_name','profit','category','sub_category']].groupby(['product_id']).agg({'profit':'sum','product_name':'first','category':'first','sub_category':'first'}).reset_index()
     high_profit_products['profit'] = high_profit_products['profit'].round(0)
     high_profit_products = high_profit_products.sort_values(by='profit', ascending=False)
     high_profit_products['total_year_profit'] = high_profit_products['profit'].sum()

@@ -120,9 +120,15 @@ with st.sidebar:
 
     for i in range(1, 6):
         # Use markdown with HTML to color the profit in green
-        profit = high_profit_products.iloc[i-1]['profit']
+        profit = int(high_profit_products.iloc[i-1]['profit'])
         product_name = high_profit_products.iloc[i-1]['product_name']
-        st.markdown(f"{i}: <span style='color:green;'>${profit}:</span> {product_name}", unsafe_allow_html=True)
+        category = high_profit_products.iloc[i-1]['category']
+        sub_category = high_profit_products.iloc[i-1]['sub_category']
+        st.markdown(f"""
+            <p style='margin-bottom: 0px;'>{i}: $ <span style='color:green;'>{profit}:</span>, <strong>{product_name}</strong></p>
+            <p style='margin-top: 0px; margin-bottom: 0px;'>Category: <span style='color:blue;'>{category}</span></p>
+            <p style='margin-top: 0px;'>Sub-category: <span style='color:blue;'>{sub_category}</span></p>
+        """, unsafe_allow_html=True)
     
     
 col1, col2, col3= st.columns(3)
