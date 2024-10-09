@@ -191,6 +191,7 @@ with col6:
     df = store_records[store_records['year'] == selected_year]
     gp_states_profit = profits_by_state(df)
     gp_states_profit['state_abbrev'] = gp_states_profit['state'].map(states_abbreviation)
+    gp_states_profit = gp_states_profit.rename(columns={'state_abbrev':'location'})
 
     # Set the color scale to ensure the color changes exactly at zero
     color_scale = [[0, 'red'], [0.5, 'lightgray'], [1, 'blue']]
@@ -198,7 +199,7 @@ with col6:
     # Ensure color midpoint is exactly at zero
     map = px.choropleth(
         gp_states_profit,
-        locations='state_abbrev',
+        locations='location',
         locationmode='USA-states',
         color='profit',
         scope='usa',
@@ -288,6 +289,8 @@ with col8:
     df = store_records[store_records['year'] == selected_year]
     gp_states_sales = sales_by_state(df)
     gp_states_sales['state_abbrev'] = gp_states_sales['state'].map(states_abbreviation)
+    gp_states_sales = gp_states_sales.rename(columns={'state_abbrev':'location'})
+
 
     # Create a custom color scale: red for negative profits, blue for positive profits
     # color_scale = [[0, 'red'], [0.5, 'lightgray'], [1, 'blue']]  # Adjust lightgray for profits near zero
@@ -295,7 +298,7 @@ with col8:
     # Create a map
     map2 = px.choropleth(
         gp_states_sales,
-        locations='state_abbrev',
+        locations='location',
         locationmode='USA-states',
         color='sales',
         scope='usa',
