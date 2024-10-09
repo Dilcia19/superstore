@@ -10,7 +10,7 @@ Data from the superstore was downloaded from the [Kaggle](https://www.kaggle.com
 
 The data consists of one table `Store Records` with the following structure:
 
-![Superstore Data Structure](data/entity_relationship_diagram.png)    
+<img src="data/entity_relationship_diagram.png" alt="Superstore Data Structure" height="400"/>
 
 - The Super Store was founded at the end of 2013 and started selling products in 2014. 
 - The store has seen year over year growth in terms of sales and profits. 
@@ -18,7 +18,7 @@ The data consists of one table `Store Records` with the following structure:
 
 **Super Store Dashboard**
 
-<img src="data/entity_relationship_diagram.png" alt="Superstore Data Structure" height="200"/>
+
 
 **KPIs: A Brief Look**<br>
 If you've had a chance to poke around on the dashboard, you may notice a few things:
