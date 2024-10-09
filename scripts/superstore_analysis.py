@@ -130,6 +130,7 @@ def high_profit_categories(df_filtered):
     high_profit_categories['total_year_profit'] = high_profit_categories['profit'].sum()
     high_profit_categories['category_profit_pct'] = (high_profit_categories['profit'] / high_profit_categories['total_year_profit']) * 100
     high_profit_categories['category_profit_pct'] = high_profit_categories['category_profit_pct'].round(0)
+    high_profit_categories = high_profit_categories.rename(columns={'category_profit_pct':'percent of profit'})
     top_5_high_profit_categories = high_profit_categories.iloc[0:5]
 
     return top_5_high_profit_categories
@@ -141,6 +142,7 @@ def high_sales_categories(df_filtered):
     high_sales_categories['total_year_sales'] = high_sales_categories['sales'].sum()
     high_sales_categories['category_sales_pct'] = (high_sales_categories['sales'] / high_sales_categories['total_year_sales']) * 100
     high_sales_categories['category_sales_pct'] = high_sales_categories['category_sales_pct'].round(0)
+    high_sales_categories = high_sales_categories.rename(columns={'category_sales_pct':'percent of sales'})
     top_5_high_profit_categories = high_sales_categories.iloc[0:5]
 
     return top_5_high_profit_categories
@@ -152,6 +154,7 @@ def high_profit_segments(df_filtered):
     high_profit_segments['total_year_profit'] = high_profit_segments['profit'].sum()
     high_profit_segments['segment_profit_pct'] = (high_profit_segments['profit'] / high_profit_segments['total_year_profit']) * 100
     high_profit_segments['segment_profit_pct'] = high_profit_segments['segment_profit_pct'].round(0)
+    high_profit_segments = high_profit_segments.rename(columns={'segment_profit_pct':'percent of profit'})
     high_profit_segments = high_profit_segments.iloc[0:5]
 
     return high_profit_segments

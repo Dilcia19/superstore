@@ -229,7 +229,7 @@ with col7:
     with col7_1:
         fig1 = px.pie(
             top_5_high_profit_categories,
-            values='category_profit_pct',
+            values='percent of profit',
             names='category',
             hole=0.6,
             title="Category by Profit %"
@@ -247,7 +247,7 @@ with col7:
     with col7_2:
         fig2 = px.pie(
             top_5_high_sales_categories,
-            values='category_sales_pct',
+            values='percent of sales',
             names='category',
             hole=0.6,
             title="Category by Sales %"
@@ -265,7 +265,7 @@ with col7:
     with col7_3:
         fig3 = px.pie(
             top_5_high_profit_segments,
-            values='segment_profit_pct',
+            values='percent of profit',
             names='segment',
             hole=0.6,
             title="Segment by Profit %"
