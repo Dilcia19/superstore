@@ -123,7 +123,12 @@ def high_profit_products(df_filtered):
     high_profit_products = high_profit_products.drop(columns=['total_year_profit', 'product_profit_pct'])
     top_5_high_profit = high_profit_products.iloc[0:5]
 
-    return top_5_high_profit
+    low_profit_products = df_filtered[['product_id','product_name','profit','category','sub_category']].groupby(['product_id']).agg({'profit':'sum','product_name':'first','category':'first','sub_category':'first'}).reset_index()
+    low_profit_products['profit'] = low_profit_products['profit'].round(0)
+    low_profit_products = low_profit_products.sort_values(by='profit', ascending=True)
+    bottom_5_low_profit = low_profit_products.iloc[0:5]
+
+    return top_5_high_profit, bottom_5_low_profit
 
 def high_profit_categories(df_filtered):
     

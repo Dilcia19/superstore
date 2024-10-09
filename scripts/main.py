@@ -113,7 +113,7 @@ with st.sidebar:
     st.title("Superstore Dashboard")
     selected_year = st.sidebar.selectbox("Select Year:", np.sort(store_records["year"].unique()))
     df = store_records[store_records['year'] == selected_year]
-    high_profit_products = high_profit_products(df)
+    high_profit_products, bottom_5_low_profit = high_profit_products(df)
     st.write("- The Super Store was founded at the end of 2013 and started selling products in 2014.")
     st.write("- The store has seen year over year growth in terms of sales and profits. With the elimination of a few key products and a few unprofitable geographical markets, we will set up the super store to break record profits and sales in the upcoming years.")
     st.header(f"These five products brought in the most profit in {selected_year}")
@@ -126,6 +126,19 @@ with st.sidebar:
         sub_category = high_profit_products.iloc[i-1]['sub_category']
         st.markdown(f"""
             <p style='margin-bottom: 0px;'>{i}: $ <span style='color:green;'>{profit}:</span>, <strong>{product_name}</strong></p>
+            <p style='margin-top: 0px; margin-bottom: 0px;'>Category: <span style='color:blue;'>{category}</span></p>
+            <p style='margin-top: 0px;'>Sub-category: <span style='color:blue;'>{sub_category}</span></p>
+        """, unsafe_allow_html=True)
+
+    st.header(f"These five products brought in the least profit in {selected_year}")
+    for i in range(1, 6):
+        # Use markdown with HTML to color the profit in green
+        profit = int(bottom_5_low_profit.iloc[i-1]['profit'])
+        product_name = bottom_5_low_profit.iloc[i-1]['product_name']
+        category = bottom_5_low_profit.iloc[i-1]['category']
+        sub_category = bottom_5_low_profit.iloc[i-1]['sub_category']
+        st.markdown(f"""
+            <p style='margin-bottom: 0px;'>{i}: $ <span style='color:red;'>{profit}:</span>, <strong>{product_name}</strong></p>
             <p style='margin-top: 0px; margin-bottom: 0px;'>Category: <span style='color:blue;'>{category}</span></p>
             <p style='margin-top: 0px;'>Sub-category: <span style='color:blue;'>{sub_category}</span></p>
         """, unsafe_allow_html=True)
