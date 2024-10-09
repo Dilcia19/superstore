@@ -2,7 +2,18 @@ import pandas as pd
 
 def profit_delta(store_records):
 
-    profit_delta = store_records[['order_id','profit','year']].groupby('year').agg({'profit':'sum','order_id':'first'}).reset_index()
+    # profit_delta = store_records[['order_id','profit','year']].groupby('year').agg({'profit':'sum','order_id':'first'}).reset_index()
+    profit_delta = (
+        store_records
+        .filter(['order_id', 'profit', 'year'])
+        .groupby('year')
+        .agg(
+            {'profit':'sum',
+            'order_id':'first'}
+        )
+        .reset_index()
+    )
+
     profits_2017 = int(profit_delta['profit'].iloc[3])
     profits_2016 = int(profit_delta['profit'].iloc[2])
     profits_2014 = int(profit_delta['profit'].iloc[0])
@@ -13,7 +24,8 @@ def profit_delta(store_records):
     profit_pct_change_recent = round(profit_pct_change_recent, 2)
 
     sales_delta = (
-        store_records.filter(['order_id', 'sales', 'year'])
+        store_records
+        .filter(['order_id', 'sales', 'year'])
         .groupby('year')
         .agg(
             {'sales':'sum',
@@ -118,9 +130,6 @@ def high_profit_products(df_filtered):
     high_profit_products = df_filtered[['product_id','product_name','profit','category','sub_category']].groupby(['product_id']).agg({'profit':'sum','product_name':'first','category':'first','sub_category':'first'}).reset_index()
     high_profit_products['profit'] = high_profit_products['profit'].round(0)
     high_profit_products = high_profit_products.sort_values(by='profit', ascending=False)
-    high_profit_products['total_year_profit'] = high_profit_products['profit'].sum()
-    high_profit_products['product_profit_pct'] = high_profit_products['profit'] / high_profit_products['total_year_profit']
-    high_profit_products = high_profit_products.drop(columns=['total_year_profit', 'product_profit_pct'])
     top_5_high_profit = high_profit_products.iloc[0:5]
 
     low_profit_products = df_filtered[['product_id','product_name','profit','category','sub_category']].groupby(['product_id']).agg({'profit':'sum','product_name':'first','category':'first','sub_category':'first'}).reset_index()
