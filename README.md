@@ -11,8 +11,8 @@ Data from the superstore was downloaded from the [Kaggle](https://www.kaggle.com
 The data consists of one table `Store Records` with the following structure:
 
 <div style="text-align: center;">
-  <img src="data/entity_relationship_diagram1.png" alt="Superstore Data Structure" height="600" width="400" />
-  <img src="data/entity_relationship_diagram2.png" alt="Second Image" height="600" width="400" /> 
+  <img src="data/entity_relationship_diagram1.png" alt="Superstore Data Structure" height="400" />
+  <img src="data/entity_relationship_diagram2.png" alt="Second Image" height="400" /> 
 </div>
 
 # Executive Summary
