@@ -67,7 +67,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Custom function to display metric with value and delta side-by-side
-def custom_metric(label, value, delta_value):
+def custom_metric(label, value, delta_value, repeat_customer):
     try:
         # Check if delta_value can be converted to a float
         delta_value = float(delta_value)
@@ -78,10 +78,17 @@ def custom_metric(label, value, delta_value):
     if delta_value > 0:
         arrow = "▲"
         delta_color = "green"
+        delta_text = f"{delta_value}%"
     elif delta_value < 0:
         arrow = "▼"
         delta_color = "red"
+        delta_text = f"{delta_value}%"
     else:
+        if repeat_customer:
+            delta_value = ""
+            arrow = ""
+            delta_color = "black"
+            delta_text = ""
         arrow = ""
         delta_color = "black"  # Neutral case
 
@@ -90,7 +97,7 @@ def custom_metric(label, value, delta_value):
         <div style='font-size: 1em;'>{label}</div>
         <div style='margin-left: 10px; font-size: 1.8em;'>
             {value} <span style='color: {delta_color}; font-size: 0.9em; margin-left: 5px;'>
-            {arrow} {delta_value}%</span>
+            {arrow} {delta_text}</span>
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -127,15 +134,15 @@ repeat_order_pct, not_first_order = repeat_customers(store_records)
 with col1:
     profits_2017 = profit_delta_dict['profits_2017']
     profit_pct_change_recent = profit_delta_dict['profit_pct_change_recent']
-    custom_metric("Profit % change, 2016-2017", '${:,}'.format(profits_2017), profit_pct_change_recent)
+    custom_metric("Profit % change,\n 2016-2017", '${:,}'.format(profits_2017), profit_pct_change_recent, False)
 
 with col2:
     sales_2017 = profit_delta_dict['sales_2017']
     sales_pct_change_recent = profit_delta_dict['sales_pct_change_recent']
-    custom_metric("Sales % change,  2016-2017", '${:,}'.format(sales_2017), sales_pct_change_recent)
+    custom_metric("Sales % change,\n  2016-2017", '${:,}'.format(sales_2017), sales_pct_change_recent, False)
 
 with col3:
-    custom_metric("% Repeat Customers", f"{repeat_order_pct}%", '')
+    custom_metric("Repeat Customers Total:", f"{repeat_order_pct}%", '', True)
 
 st.markdown("<hr style='margin-top: 10px;'>", unsafe_allow_html=True)
 
