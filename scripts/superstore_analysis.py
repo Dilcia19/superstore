@@ -2,7 +2,6 @@ import pandas as pd
 
 def profit_delta(store_records):
 
-    # profit_delta = store_records[['order_id','profit','year']].groupby('year').agg({'profit':'sum','order_id':'first'}).reset_index()
     profit_delta = (
         store_records
         .filter(['order_id', 'profit', 'year'])
@@ -113,10 +112,26 @@ def repeat_customers(store_records):
 
 def top_sub_categories_profit(df_filtered):
 
-    top_5_sub_category_year = df_filtered[['product_id', 'profit', 'product_name','category','sub_category']].groupby(['sub_category']).agg({'profit':'sum'}).rename(columns={'product_id':'product_id_count'}).sort_values(by='profit', ascending=False).reset_index()
-    top_5_sub_category_year = top_5_sub_category_year[['sub_category', 'profit']]
-    top_5_sub_category_year['profit'] = top_5_sub_category_year['profit'].round(0)
-    top_5_sub_category_year = top_5_sub_category_year.iloc[0:5]
+    top_5_sub_category_year = (
+        df_filtered
+        .filter(['product_id', 'profit', 'product_name',
+                 'category','sub_category'])
+        .groupby(['sub_category'])
+        .agg(
+            {'profit':'sum'}
+        )
+        .rename(columns={'product_id':'product_id_count'})
+        .sort_values(by='profit', ascending=False)
+        .reset_index()
+        .filter(['sub_category', 'profit'])
+        .assign(profit=lambda x: x.profit.round(0))
+        .iloc[0:5]
+    )
+
+    # top_5_sub_category_year = df_filtered[['product_id', 'profit', 'product_name','category','sub_category']].groupby(['sub_category']).agg({'profit':'sum'}).rename(columns={'product_id':'product_id_count'}).sort_values(by='profit', ascending=False).reset_index()
+    # top_5_sub_category_year = top_5_sub_category_year[['sub_category', 'profit']]
+    # top_5_sub_category_year['profit'] = top_5_sub_category_year['profit'].round(0)
+    # top_5_sub_category_year = top_5_sub_category_year.iloc[0:5]
 
     return top_5_sub_category_year
 
