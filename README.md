@@ -41,6 +41,6 @@ Trouble Products:
 - It is likely time to drop this product. 
 
 Great Products:
-- In terms of products to invest in, copiers seem to do well - they sell for a higher price point and are often in the list for top profitable products of the year.
+- In terms of products to invest in, copiers do well - they sell for a higher price point and are often in the list for top profitable products of the year.
 
 
