@@ -87,19 +87,24 @@ def repeat_customers(store_records):
     # and 772 repeat customers who have purchased from the store more than once
     retention_rate_pv['single_purchase_customer'] = retention_rate_pv[retention_rate_pv == 0].count(axis=1).gt(2)
     repeat_customers = retention_rate_pv[retention_rate_pv['single_purchase_customer'] == False]
-
     repeat_customers_ls = list(repeat_customers['customer_id'].unique())
 
     # what % of purchases are repeated (customerID)
     ## make sure I didn't count unique orders without grouping
-    df_repeat_customers = store_records[store_records['customer_id'].isin(repeat_customers_ls)]
-    df_repeat_customers = df_repeat_customers[['order_id','customer_id', 'product_id']]
-    df_repeat_customers = df_repeat_customers.groupby(['customer_id', 'order_id']).agg('count').reset_index()
+    df_repeat_customers = (
+        store_records
+        .query("customer_id in @repeat_customers_ls")
+        .filter(['order_id','customer_id', 'product_id'])
+        .groupby(['customer_id', 'order_id'])
+        .agg('count')
+        .reset_index()
+    )
 
     # after grouping, we have to subtract number of unique customers from unique orders
     # unique orders is counting all orders
     # for the purposes of calculating % of repeat orders, we can't count the first order
     # hence, deleting one order for each customer or the number of unique customers removed from total unique orders
+
     number_of_repeat_orders = len(df_repeat_customers['order_id'].unique()) - len(df_repeat_customers['customer_id'].unique())
     number_of_unique_customers = len(df_repeat_customers['customer_id'].unique())
     pct_repeated_orders = (number_of_repeat_orders - number_of_unique_customers) / store_records['order_id'].nunique()
