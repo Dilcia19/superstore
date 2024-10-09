@@ -18,7 +18,7 @@ The data consists of one table `Store Records` with the following structure:
 
 **Super Store Dashboard**
 
-<img src="data/entity_relationship_diagram.png" alt="Superstore Data Structure" width="500"/>
+<img src="data/entity_relationship_diagram.png" alt="Superstore Data Structure" height="200"/>
 
 **KPIs: A Brief Look**<br>
 If you've had a chance to poke around on the dashboard, you may notice a few things:
