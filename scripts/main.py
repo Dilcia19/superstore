@@ -279,11 +279,7 @@ with col7:
             height=350  # Slightly bigger height
         )
         st.plotly_chart(fig3, use_container_width=True, key="donut3")
-
-
-
-
-        
+   
 
 with col8:
     df = store_records[store_records['year'] == selected_year]
