@@ -153,14 +153,32 @@ def top_sub_categories_sales(df_filtered):
 
 def profits_by_state(df_filtered):
 
-    gp_states_profit = df_filtered[['state','profit']].groupby('state').agg({'profit':'sum'}).reset_index()
-    gp_states_profit['profit'] = gp_states_profit['profit'].round(0)
+    gp_states_profit = (
+        df_filtered
+        .filter(['state', 'profit'])
+        .groupby(['state'])
+        .agg(
+            {'profit':'sum'}
+        )
+        .reset_index()
+        .assign(profit=lambda x: x.profit.round(0))
+    )
+
     return gp_states_profit
 
 def sales_by_state(df_filtered):
 
-    gp_states_sales = df_filtered[['state','sales']].groupby('state').agg({'sales':'sum'}).reset_index()
-    gp_states_sales['sales'] = gp_states_sales['sales'].round(0)
+    gp_states_sales = (
+        df_filtered
+        .filter(['state', 'sales'])
+        .groupby(['state'])
+        .agg(
+            {'sales':'sum'}
+        )
+        .reset_index()
+        .assign(sales=lambda x: x.sales.round(0))
+    )
+
     return gp_states_sales
 
 def high_profit_products(df_filtered):
