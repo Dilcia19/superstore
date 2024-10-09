@@ -3,8 +3,14 @@
 Data from the superstore was downloaded from the [Kaggle](https://www.kaggle.com/datasets/vivek468/superstore-dataset-final?resource=download). The Superstore has collected data since 2014 and had an overall growth trajectory from 2014 to 2017. The insights in this report aim to propel the Superstore into further growth and financial success.
 
 - Insights are provided based on profit and sales metrics.
-- The pandas queries used to analyze the data can be found [here:](https://github.com/Dilcia19/superstore_analysis/blob/main/scripts/superstore_analysis.py)
-- The code powering the dashboard can be found [here:](https://github.com/Dilcia19/superstore_analysis/blob/main/scripts/main.py)
+- The pandas queries used to analyze the data can be found [here.](https://github.com/Dilcia19/superstore_analysis/blob/main/scripts/superstore_analysis.py)
+- The code powering the dashboard can be found [here.](https://github.com/Dilcia19/superstore_analysis/blob/main/scripts/main.py)
+
+# Data Structure
+
+The data consists of one table `Store Records` with the following structure:
+
+![Superstore Data Structure](data/entity_relationship_diagram.png)    
 
 - The Super Store was founded at the end of 2013 and started selling products in 2014. 
 - The store has seen year over year growth in terms of sales and profits. 
