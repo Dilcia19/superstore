@@ -254,13 +254,21 @@ def high_sales_categories(df_filtered):
 
 def high_profit_segments(df_filtered):
 
-    high_profit_segments = df_filtered[['segment','profit']].groupby('segment').agg({'profit':'sum'}).reset_index()
-    high_profit_segments = high_profit_segments.sort_values(by='profit', ascending=False)
-    high_profit_segments['total_year_profit'] = high_profit_segments['profit'].sum()
-    high_profit_segments['segment_profit_pct'] = (high_profit_segments['profit'] / high_profit_segments['total_year_profit']) * 100
-    high_profit_segments['segment_profit_pct'] = high_profit_segments['segment_profit_pct'].round(0)
-    high_profit_segments = high_profit_segments.rename(columns={'segment_profit_pct':'percent of profit'})
-    high_profit_segments = high_profit_segments.iloc[0:5]
+    high_profit_segments = (
+        df_filtered
+        .filter(['segment','profit'])
+        .groupby(['segment'])
+        .agg(
+            {'profit':'sum'}
+        )
+        .reset_index()
+        .sort_values(by='profit', ascending=False)
+        .assign(total_year_profit=lambda x: x.profit.sum())
+        .assign(segment_profit_pct=lambda x: (x.profit / x.total_year_profit) * 100)
+        .assign(segment_profit_pct=lambda x: x.segment_profit_pct.round(0))
+        .rename(columns={'segment_profit_pct':'percent of profit'})
+        .iloc[0:5]
+    )
 
     return high_profit_segments
 
