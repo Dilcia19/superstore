@@ -85,7 +85,7 @@ def top_sub_categories_profit(df_filtered):
 
     top_5_sub_category_year = df_filtered[['product_id', 'profit', 'product_name','category','sub_category']].groupby(['sub_category']).agg({'profit':'sum'}).rename(columns={'product_id':'product_id_count'}).sort_values(by='profit', ascending=False).reset_index()
     top_5_sub_category_year = top_5_sub_category_year[['sub_category', 'profit']]
-    top_5_sub_category_year['profit'] = top_5_sub_category_year['profit'].round(1)
+    top_5_sub_category_year['profit'] = top_5_sub_category_year['profit'].round(0)
     top_5_sub_category_year = top_5_sub_category_year.iloc[0:5]
 
 
@@ -95,7 +95,7 @@ def top_sub_categories_sales(df_filtered):
 
     top_5_sub_category_syear = df_filtered[['product_id', 'sales', 'product_name','category','sub_category']].groupby(['sub_category']).agg({'sales':'sum'}).rename(columns={'product_id':'product_id_count'}).sort_values(by='sales', ascending=False).reset_index()
     top_5_sub_category_syear = top_5_sub_category_syear[['sub_category', 'sales']]
-    top_5_sub_category_syear['sales'] = top_5_sub_category_syear['sales'].round(1)
+    top_5_sub_category_syear['sales'] = top_5_sub_category_syear['sales'].round(0)
     top_5_sub_category_syear = top_5_sub_category_syear.iloc[0:5]
 
     return top_5_sub_category_syear
@@ -114,7 +114,7 @@ def sales_by_state(df_filtered):
 def high_profit_products(df_filtered):
     
     high_profit_products = df_filtered[['product_id','product_name','profit','category']].groupby(['product_id']).agg({'profit':'sum','product_name':'first','category':'first'}).reset_index()
-    high_profit_products['profit'] = high_profit_products['profit'].round(1)
+    high_profit_products['profit'] = high_profit_products['profit'].round(0)
     high_profit_products = high_profit_products.sort_values(by='profit', ascending=False)
     high_profit_products['total_year_profit'] = high_profit_products['profit'].sum()
     high_profit_products['product_profit_pct'] = high_profit_products['profit'] / high_profit_products['total_year_profit']
