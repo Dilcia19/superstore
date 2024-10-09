@@ -12,7 +12,7 @@ The data consists of one table `Store Records` with the following structure:
 
 <p float="left">
   <img src="data/entity_relationship_diagram.png" alt="Superstore Data Structure" height="400" />
-  <img src="data/second_image.png" alt="Second Image" height="400" /> 
+  <img src="data/entity_relationship_diagram.png" alt="Second Image" height="400" /> 
 </p>
 
 - The Super Store was founded at the end of 2013 and started selling products in 2014. 
