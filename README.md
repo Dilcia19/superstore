@@ -15,6 +15,10 @@ The data consists of one table `Store Records` with the following structure:
   <img src="data/entity_relationship_diagram2.png" alt="Second Image" height="600" width="400" /> 
 </div>
 
+# Executive Summary
+
+![Superstore Dashboard](data/superstore_dashboard.png)
+
 - The Super Store was founded at the end of 2013 and started selling products in 2014. 
 - The store has seen year over year growth in terms of sales and profits. 
 - With the elimination of a few key products and a few unprofitable geographical markets, we will set up the super store to break record profits and sales in the upcoming years
