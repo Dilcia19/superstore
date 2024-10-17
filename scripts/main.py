@@ -138,7 +138,7 @@ with st.sidebar:
 col1, col2, col3= st.columns(3)
 
 profit_delta_dict = profit_delta(store_records)
-repeat_order_pct, not_first_order = repeat_customers(store_records)
+repeat_order_pct = repeat_customers(store_records)
 
 # Using the custom_metric function in each column
 with col1:

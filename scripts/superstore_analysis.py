@@ -86,7 +86,9 @@ def repeat_customers(store_records):
 
     # and 772 repeat customers who have purchased from the store more than once
     retention_rate_pv['single_purchase_customer'] = retention_rate_pv[retention_rate_pv == 0].count(axis=1).gt(2)
+    # df for customers who made more than one purchase
     repeat_customers = retention_rate_pv[retention_rate_pv['single_purchase_customer'] == False]
+    # list of customers who made more than one purchase
     repeat_customers_ls = list(repeat_customers['customer_id'].unique())
 
     # what % of purchases are repeated (customerID)
@@ -95,7 +97,7 @@ def repeat_customers(store_records):
         store_records
         .query("customer_id in @repeat_customers_ls")
         .filter(['order_id','customer_id', 'product_id'])
-        .groupby(['customer_id', 'order_id'])
+        .groupby(['customer_id', 'order_id']) # orders may have multiple rows b/c they have multiple products + don't want to double-count
         .agg('count')
         .reset_index()
     )
@@ -113,9 +115,9 @@ def repeat_customers(store_records):
     pct_repeated_orders = (number_of_repeat_orders - number_of_unique_customers) / store_records['order_id'].nunique()
     pct_repeated_orders = round(pct_repeated_orders, 2) * 100
 
-    not_first_order = number_of_repeat_orders - number_of_unique_customers
+    # not_first_order = number_of_repeat_orders - number_of_unique_customers
 
-    return pct_repeated_orders, not_first_order
+    return pct_repeated_orders
 
 def top_sub_categories_profit(df_filtered):
 

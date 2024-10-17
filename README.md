@@ -27,7 +27,7 @@ The data consists of one table `Store Records` with the following structure:
 
 In 2017, the Superstore had its best year in terms of sales and profits. The store has seen year over year growth and is doing well in the New York and California markets. From 2016 to 2017, the store saw a 14% increase in profits and a 20% increase in sales revenue. 
 
-Nearly 70% of customers who made a purchase have come back to make another purchase. Overall, health for the Superstore is in the green. Unfortunately, the store is not doing well in the states of Texas and Illinois and has poor profit margins in the furniiture segment.
+Nearly 40% of customers who made a purchase have come back to make another purchase. Overall, health for the Superstore is in the green. Unfortunately, the store is not doing well in the states of Texas and Illinois and has poor profit margins in the furniiture segment.
 
 ![Superstore Dashboard](data/superstore.png)
 
