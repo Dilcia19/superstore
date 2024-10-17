@@ -152,12 +152,12 @@ repeat_order_pct, not_first_order = repeat_customers(store_records)
 with col1:
     sales_2017 = profit_delta_dict['sales_2017']
     sales_pct_change_recent = profit_delta_dict['sales_pct_change_recent']
-    custom_metric("Sales % change,\n  2016-2017", '${:,}'.format(sales_2017), sales_pct_change_recent, False)
+    custom_metric("Sales,\n  2016-2017", '${:,}'.format(sales_2017), sales_pct_change_recent, False)
 
 with col2:
     profits_2017 = profit_delta_dict['profits_2017']
     profit_pct_change_recent = profit_delta_dict['profit_pct_change_recent']
-    custom_metric("Profit % change,\n 2016-2017", '${:,}'.format(profits_2017), profit_pct_change_recent, False)
+    custom_metric("Profit,\n 2016-2017", '${:,}'.format(profits_2017), profit_pct_change_recent, False)
 
 with col3:
     custom_metric("Repeat Customers Total:", f"{repeat_order_pct}%", '', True)
