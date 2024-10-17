@@ -150,14 +150,14 @@ repeat_order_pct, not_first_order = repeat_customers(store_records)
 
 # Using the custom_metric function in each column
 with col1:
-    profits_2017 = profit_delta_dict['profits_2017']
-    profit_pct_change_recent = profit_delta_dict['profit_pct_change_recent']
-    custom_metric("Profit % change,\n 2016-2017", '${:,}'.format(profits_2017), profit_pct_change_recent, False)
-
-with col2:
     sales_2017 = profit_delta_dict['sales_2017']
     sales_pct_change_recent = profit_delta_dict['sales_pct_change_recent']
     custom_metric("Sales % change,\n  2016-2017", '${:,}'.format(sales_2017), sales_pct_change_recent, False)
+
+with col2:
+    profits_2017 = profit_delta_dict['profits_2017']
+    profit_pct_change_recent = profit_delta_dict['profit_pct_change_recent']
+    custom_metric("Profit % change,\n 2016-2017", '${:,}'.format(profits_2017), profit_pct_change_recent, False)
 
 with col3:
     custom_metric("Repeat Customers Total:", f"{repeat_order_pct}%", '', True)
@@ -167,6 +167,26 @@ st.markdown("<hr style='margin-top: 10px;'>", unsafe_allow_html=True)
 col4, col5, col6 = st.columns([1.5, 1.5, 2])
 
 with col4:
+    df = store_records[store_records['year'] == selected_year]
+    top_subs_sales = top_sub_categories_sales(df)
+    top_subs_sales = top_subs_sales.rename(columns={'sub_category':'Sub-categories'})
+
+    # Create a bar chart with sorted bars
+    chart = alt.Chart(top_subs_sales).mark_bar().encode(
+        x=alt.X('Sub-categories:N', sort='-y'),  # Sort x-axis based on y-values in descending order
+        y=alt.Y('sales:Q', title='Sales', axis=alt.Axis(format=',d')),
+        tooltip=alt.Tooltip('sales:Q', format=',')
+    ).properties(
+        width=alt.Step(80),
+        height=325,
+        title="Top 5 Sub-categories by Sales",
+        padding={"top": 0, "bottom": 0}    # Adjust bar width as needed
+    )
+    # Display the chart in Streamlit
+    st.altair_chart(chart, use_container_width=True)
+
+
+with col5:
     df = store_records[store_records['year'] == selected_year]
     top_subs = top_sub_categories_profit(df)
     top_subs = top_subs.rename(columns={'sub_category':'Sub-categories'})
@@ -183,25 +203,6 @@ with col4:
         padding={"top": 0, "bottom": 0}  # Remove top and bottom padding
     )
 
-    # Display the chart in Streamlit
-    st.altair_chart(chart, use_container_width=True)
-
-
-with col5:
-    df = store_records[store_records['year'] == selected_year]
-    top_subs_sales = top_sub_categories_sales(df)
-    top_subs_sales = top_subs_sales.rename(columns={'sub_category':'Sub-categories'})
-    # Create a bar chart with sorted bars
-    chart = alt.Chart(top_subs_sales).mark_bar().encode(
-        x=alt.X('Sub-categories:N', sort='-y'),  # Sort x-axis based on y-values in descending order
-        y=alt.Y('sales:Q', title='Sales', axis=alt.Axis(format=',d')),
-        tooltip=alt.Tooltip('sales:Q', format=',')
-    ).properties(
-        width=alt.Step(80),
-        height=325,
-        title="Top 5 Sub-categories by Sales",
-        padding={"top": 0, "bottom": 0}    # Adjust bar width as needed
-    )
     # Display the chart in Streamlit
     st.altair_chart(chart, use_container_width=True)
 
