@@ -123,8 +123,6 @@ with st.sidebar:
         product_name = high_profit_products.iloc[i-1]['product_name']
         st.markdown(f"""
             <p style='margin-bottom: 0px;'>{i}: $ <span style='color:green;'>{profit}:</span>, <strong>{product_name}</strong></p>
-            <p style='margin-top: 0px; margin-bottom: 0px;'>Category: <span style='color:blue;'>{category}</span></p>
-            <p style='margin-top: 0px;'>Sub-category: <span style='color:blue;'>{sub_category}</span></p>
         """, unsafe_allow_html=True)
 
     st.header(f"These five products brought in the least profit in {selected_year}")
@@ -134,8 +132,6 @@ with st.sidebar:
         product_name = bottom_5_low_profit.iloc[i-1]['product_name']
         st.markdown(f"""
             <p style='margin-bottom: 0px;'>{i}: $ <span style='color:red;'>{profit}:</span>, <strong>{product_name}</strong></p>
-            <p style='margin-top: 0px; margin-bottom: 0px;'>Category: <span style='color:blue;'>{category}</span></p>
-            <p style='margin-top: 0px;'>Sub-category: <span style='color:blue;'>{sub_category}</span></p>
         """, unsafe_allow_html=True)
     
     
@@ -157,6 +153,8 @@ with col2:
 
 with col3:
     custom_metric("Repeat Customers Total:", f"{repeat_order_pct}%", '', True)
+    print(repeat_order_pct)
+    # st.write(repeat_order_pct)
 
 st.markdown("<hr style='margin-top: 10px;'>", unsafe_allow_html=True)
 
