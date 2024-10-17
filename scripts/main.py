@@ -208,31 +208,30 @@ with col5:
 
 with col6:
     df = store_records[store_records['year'] == selected_year]
-    gp_states_profit = profits_by_state(df)
-    gp_states_profit['state_abbrev'] = gp_states_profit['state'].map(states_abbreviation)
-    gp_states_profit = gp_states_profit.rename(columns={'state_abbrev':'location'})
+    gp_states_sales = sales_by_state(df)
+    gp_states_sales['state_abbrev'] = gp_states_sales['state'].map(states_abbreviation)
+    gp_states_sales = gp_states_sales.rename(columns={'state_abbrev':'location'})
 
-    # Set the color scale to ensure the color changes exactly at zero
-    color_scale = [[0, 'red'], [0.5, 'lightgray'], [1, 'blue']]
 
-    # Ensure color midpoint is exactly at zero
-    map = px.choropleth(
-        gp_states_profit,
+    # Create a custom color scale: red for negative profits, blue for positive profits
+    # color_scale = [[0, 'red'], [0.5, 'lightgray'], [1, 'blue']]  # Adjust lightgray for profits near zero
+
+    # Create a map
+    map1 = px.choropleth(
+        gp_states_sales,
         locations='location',
         locationmode='USA-states',
-        color='profit',
+        color='sales',
         scope='usa',
         hover_name='state',
-        color_continuous_scale=color_scale,
-        range_color=[gp_states_profit['profit'].min(), gp_states_profit['profit'].max()],  # Range for the color scale
-        color_continuous_midpoint=0  # Set zero as the midpoint
+        color_continuous_scale='blues'
     )
 
     # Update layout
-    map.update_layout(title_text="Profits by State", title_x=0.5, height=325)
+    map1.update_layout(title_text="Sales by State", title_x=0.5, height=325)
     
     # Display the map in Streamlit
-    st.plotly_chart(map, key="map1")
+    st.plotly_chart(map1, key="map1")
 
 
 col7, col8 = st.columns([3, 2])
@@ -302,27 +301,28 @@ with col7:
 
 with col8:
     df = store_records[store_records['year'] == selected_year]
-    gp_states_sales = sales_by_state(df)
-    gp_states_sales['state_abbrev'] = gp_states_sales['state'].map(states_abbreviation)
-    gp_states_sales = gp_states_sales.rename(columns={'state_abbrev':'location'})
+    gp_states_profit = profits_by_state(df)
+    gp_states_profit['state_abbrev'] = gp_states_profit['state'].map(states_abbreviation)
+    gp_states_profit = gp_states_profit.rename(columns={'state_abbrev':'location'})
 
+    # Set the color scale to ensure the color changes exactly at zero
+    color_scale = [[0, 'red'], [0.5, 'lightgray'], [1, 'blue']]
 
-    # Create a custom color scale: red for negative profits, blue for positive profits
-    # color_scale = [[0, 'red'], [0.5, 'lightgray'], [1, 'blue']]  # Adjust lightgray for profits near zero
-
-    # Create a map
+    # Ensure color midpoint is exactly at zero
     map2 = px.choropleth(
-        gp_states_sales,
+        gp_states_profit,
         locations='location',
         locationmode='USA-states',
-        color='sales',
+        color='profit',
         scope='usa',
         hover_name='state',
-        color_continuous_scale='blues'
+        color_continuous_scale=color_scale,
+        range_color=[gp_states_profit['profit'].min(), gp_states_profit['profit'].max()],  # Range for the color scale
+        color_continuous_midpoint=0  # Set zero as the midpoint
     )
 
     # Update layout
-    map2.update_layout(title_text="Sales by State", title_x=0.5, height=325)
+    map2.update_layout(title_text="Profits by State", title_x=0.5, height=325)
     
     # Display the map in Streamlit
     st.plotly_chart(map2, key="map2")
