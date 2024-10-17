@@ -121,8 +121,6 @@ with st.sidebar:
         # Use markdown with HTML to color the profit in green
         profit = int(high_profit_products.iloc[i-1]['profit'])
         product_name = high_profit_products.iloc[i-1]['product_name']
-        category = high_profit_products.iloc[i-1]['category']
-        sub_category = high_profit_products.iloc[i-1]['sub_category']
         st.markdown(f"""
             <p style='margin-bottom: 0px;'>{i}: $ <span style='color:green;'>{profit}:</span>, <strong>{product_name}</strong></p>
             <p style='margin-top: 0px; margin-bottom: 0px;'>Category: <span style='color:blue;'>{category}</span></p>
@@ -134,8 +132,6 @@ with st.sidebar:
         # Use markdown with HTML to color the profit in green
         profit = int(bottom_5_low_profit.iloc[i-1]['profit'])
         product_name = bottom_5_low_profit.iloc[i-1]['product_name']
-        category = bottom_5_low_profit.iloc[i-1]['category']
-        sub_category = bottom_5_low_profit.iloc[i-1]['sub_category']
         st.markdown(f"""
             <p style='margin-bottom: 0px;'>{i}: $ <span style='color:red;'>{profit}:</span>, <strong>{product_name}</strong></p>
             <p style='margin-top: 0px; margin-bottom: 0px;'>Category: <span style='color:blue;'>{category}</span></p>
