@@ -1,10 +1,16 @@
 # Project Background
 
-Data from the superstore was downloaded from the [Kaggle](https://www.kaggle.com/datasets/vivek468/superstore-dataset-final?resource=download). The Superstore has collected data since 2014 and had an overall growth trajectory from 2014 to 2017. The insights in this report aim to propel the Superstore into further growth and financial success.
+**Overview:** The goal of the super store analysis is to analyze the distribution of sales and profits between the years 2014-2017. The analysis and dashboard provides data to inform stakeholders on which products to promote and discontinue; in addition, highlights markets that are performing well and ones that are not.
 
 - Insights are provided based on profit and sales metrics.
 - The pandas queries used to analyze the data can be found [here.](https://github.com/Dilcia19/superstore_analysis/blob/main/scripts/superstore_analysis.py)
 - The code powering the dashboard can be found [here.](https://github.com/Dilcia19/superstore_analysis/blob/main/scripts/main.py)
+
+**Data Source:** Data from the superstore was downloaded from the [Kaggle](https://www.kaggle.com/datasets/vivek468/superstore-dataset-final?resource=download). The Superstore has collected data since 2014 and had an overall growth trajectory from 2014 to 2017. The insights in this report aim to propel the Superstore into further growth and financial success.
+
+**Tools:** Data cleaning and analysis were done with pandas. The dashboard was built with streamlit, a python framework that allows data analysts to build interactive dashboards without the need for directly building out having to develop the front-end with HTML, CSS and Javascript.
+
+
 
 # Data Structure
 
