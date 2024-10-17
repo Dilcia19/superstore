@@ -239,11 +239,11 @@ with col7:
 
     with col7_1:
         fig1 = px.pie(
-            top_5_high_profit_categories,
-            values='distribution of profit',
+            top_5_high_sales_categories,
+            values='distribution of sales',
             names='category',
             hole=0.6,
-            title="Profit Distribution by Category"
+            title="Sales Distribution by Category"
         )
         # Show only percentages
         fig1.update_traces(textinfo='percent')
@@ -254,14 +254,15 @@ with col7:
             height=350  # Slightly bigger height
         )
         st.plotly_chart(fig1, use_container_width=True, key="donut1")
+        
 
     with col7_2:
         fig2 = px.pie(
-            top_5_high_sales_categories,
-            values='distribution of sales',
+            top_5_high_profit_categories,
+            values='distribution of profit',
             names='category',
             hole=0.6,
-            title="Sales Distribution by Category"
+            title="Profit Distribution by Category"
         )
         # Show only percentages
         fig2.update_traces(textinfo='percent')
@@ -272,6 +273,7 @@ with col7:
             height=350  # Slightly bigger height
         )
         st.plotly_chart(fig2, use_container_width=True, key="donut2")
+
 
     with col7_3:
         fig3 = px.pie(
