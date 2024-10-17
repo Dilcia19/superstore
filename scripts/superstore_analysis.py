@@ -109,8 +109,6 @@ def repeat_customers(store_records):
 
     number_of_repeat_orders = len(df_repeat_customers['order_id'].unique()) - len(df_repeat_customers['customer_id'].unique())
     number_of_unique_customers = len(df_repeat_customers['customer_id'].unique())
-    print('number_of_repeat_orders:', number_of_repeat_orders)
-    print('number_of_unique_customers:', number_of_unique_customers)
     
     pct_repeated_orders = (number_of_repeat_orders - number_of_unique_customers) / store_records['order_id'].nunique()
     pct_repeated_orders = round(pct_repeated_orders, 2) * 100
@@ -235,7 +233,7 @@ def high_profit_categories(df_filtered):
         .assign(total_year_profit=lambda x: x.profit.sum())
         .assign(category_profit_pct=lambda x: (x.profit / x.total_year_profit) * 100)
         .assign(category_profit_pct=lambda x: x.category_profit_pct.round(0))
-        .rename(columns={'category_profit_pct':'percent of profit'})
+        .rename(columns={'category_profit_pct':'distribution of profit'})
         .iloc[0:5]
     )
 
@@ -255,7 +253,7 @@ def high_sales_categories(df_filtered):
         .assign(total_year_sales=lambda x: x.sales.sum())
         .assign(category_sales_pct=lambda x: (x.sales / x.total_year_sales) * 100)
         .assign(category_sales_pct=lambda x: x.category_sales_pct.round(0))
-        .rename(columns={'category_sales_pct':'percent of sales'})
+        .rename(columns={'category_sales_pct':'distribution of sales'})
         .iloc[0:5]
     )
 

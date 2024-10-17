@@ -153,8 +153,7 @@ with col2:
 
 with col3:
     custom_metric("Repeat Customers Total:", f"{repeat_order_pct}%", '', True)
-    print(repeat_order_pct)
-    # st.write(repeat_order_pct)
+
 
 st.markdown("<hr style='margin-top: 10px;'>", unsafe_allow_html=True)
 
@@ -241,10 +240,10 @@ with col7:
     with col7_1:
         fig1 = px.pie(
             top_5_high_profit_categories,
-            values='percent of profit',
+            values='distribution of profit',
             names='category',
             hole=0.6,
-            title="Category by Profit %"
+            title="Profit Distribution by Category"
         )
         # Show only percentages
         fig1.update_traces(textinfo='percent')
@@ -259,10 +258,10 @@ with col7:
     with col7_2:
         fig2 = px.pie(
             top_5_high_sales_categories,
-            values='percent of sales',
+            values='distribution of sales',
             names='category',
             hole=0.6,
-            title="Category by Sales %"
+            title="Sales Distribution by Category"
         )
         # Show only percentages
         fig2.update_traces(textinfo='percent')
