@@ -107,6 +107,8 @@ def repeat_customers(store_records):
 
     number_of_repeat_orders = len(df_repeat_customers['order_id'].unique()) - len(df_repeat_customers['customer_id'].unique())
     number_of_unique_customers = len(df_repeat_customers['customer_id'].unique())
+    print('number_of_repeat_orders:', number_of_repeat_orders)
+    print('number_of_unique_customers:', number_of_unique_customers)
     
     pct_repeated_orders = (number_of_repeat_orders - number_of_unique_customers) / store_records['order_id'].nunique()
     pct_repeated_orders = round(pct_repeated_orders, 2) * 100
