@@ -41,6 +41,6 @@ Additional dashboard data points:
 # TODO:
 - ✅ refactor EDA code to make it more readable & add comments to the EDA code
 - ✅ refactor the functions I'm calling on in `superstore_analysis.py`
-- refactor the front-end code to be cleaner
-- update the readme with some code from the analysis
+- ✅ refactor the front-end code to be cleaner
+- ❌ update the readme with some code from the analysis (I'm good on this actually)
 
