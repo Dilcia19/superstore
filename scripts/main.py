@@ -110,7 +110,7 @@ st.write("\n")
 
 with st.sidebar:
     st.title("Superstore Dashboard")
-    selected_year = st.sidebar.selectbox("Select Year:", np.sort(store_records["year"].unique()))
+    selected_year = st.sidebar.selectbox("Select Year:", np.sort(store_records["year"].unique())[::-1])
     df = store_records[store_records['year'] == selected_year]
     high_profit_products, bottom_5_low_profit = high_profit_products(df)
     st.write("- The Super Store was founded at the end of 2013 and started selling products in 2014.")
