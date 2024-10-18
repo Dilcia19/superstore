@@ -159,45 +159,101 @@ st.markdown("<hr style='margin-top: 10px;'>", unsafe_allow_html=True)
 
 col4, col5, col6 = st.columns([1.5, 1.5, 2])
 
+# with col4:
+#     df = store_records[store_records['year'] == selected_year]
+#     top_subs_sales = top_sub_categories_sales(df)
+#     top_subs_sales = top_subs_sales.rename(columns={'sub_category':'Sub-categories'})
+
+#     # Create a bar chart with sorted bars
+#     chart = alt.Chart(top_subs_sales).mark_bar().encode(
+#         x=alt.X('Sub-categories:N', sort='-y'),  # Sort x-axis based on y-values in descending order
+#         y=alt.Y('sales:Q', title='Sales', axis=alt.Axis(format=',d')),
+#         tooltip=alt.Tooltip('sales:Q', format=',')
+#     ).properties(
+#         width=alt.Step(80),
+#         height=325,
+#         title="Top 5 Sub-categories by Sales",
+#         padding={"top": 0, "bottom": 0}    # Adjust bar width as needed
+#     )
+#     # Display the chart in Streamlit
+#     st.altair_chart(chart, use_container_width=True)
+
+
 with col4:
     df = store_records[store_records['year'] == selected_year]
-    top_subs_sales = top_sub_categories_sales(df)
-    top_subs_sales = top_subs_sales.rename(columns={'sub_category':'Sub-categories'})
+    top_subs = top_sub_categories_sales(df)
+    
+    # Melt the dataframe to long format for easier plotting
+    melted_df = pd.melt(top_subs, id_vars=['sub_category'], value_vars=['sales', 'profit'], var_name='Metric', value_name='Value')
 
-    # Create a bar chart with sorted bars
-    chart = alt.Chart(top_subs_sales).mark_bar().encode(
-        x=alt.X('Sub-categories:N', sort='-y'),  # Sort x-axis based on y-values in descending order
-        y=alt.Y('sales:Q', title='Sales', axis=alt.Axis(format=',d')),
-        tooltip=alt.Tooltip('sales:Q', format=',')
+    # Create the chart
+    chart = alt.Chart(melted_df).mark_bar().encode(
+        x=alt.X('sub_category:N', title='Sub-category', sort='-y'),  # Sub-category axis
+        y=alt.Y('Value:Q', title='Amount in Sales/Profit'),  # Amount axis
+        color=alt.Color('Metric:N', sort=['sales', 'profit']),  # Sort to display sales first in color legend
+        xOffset=alt.XOffset('Metric:N', sort=['sales', 'profit']),  # Ensure sales comes first in the offset
+        tooltip=[alt.Tooltip('sub_category:N', title='Sub-category'),
+                 alt.Tooltip('Metric:N', title='Metric'),
+                 alt.Tooltip('Value:Q', title='Amount', format=',')]  # Add comma format to the Value
     ).properties(
-        width=alt.Step(80),
+        width=alt.Step(40),
         height=325,
-        title="Top 5 Sub-categories by Sales",
-        padding={"top": 0, "bottom": 0}    # Adjust bar width as needed
-    )
-    # Display the chart in Streamlit
-    st.altair_chart(chart, use_container_width=True)
-
-
-with col5:
-    df = store_records[store_records['year'] == selected_year]
-    top_subs = top_sub_categories_profit(df)
-    top_subs = top_subs.rename(columns={'sub_category':'Sub-categories'})
-
-    # Create a bar chart with sorted bars
-    chart = alt.Chart(top_subs).mark_bar().encode(
-        x=alt.X('Sub-categories:N', sort='-y'),  # Sort x-axis based on y-values in descending order
-        y=alt.Y('profit:Q', title='Profit', axis=alt.Axis(format=',d')),
-        tooltip=alt.Tooltip('profit:Q', format=',')
-    ).properties(
-        width=alt.Step(80),
-        height=325,
-        title="Top 5 Sub-categories by Profit",   # Adjust bar width as needed
-        padding={"top": 0, "bottom": 0}  # Remove top and bottom padding
+        title="Sales and profits, top 5 categories"
     )
 
     # Display the chart in Streamlit
     st.altair_chart(chart, use_container_width=True)
+
+
+    
+
+    
+  
+
+
+# Filter the data for the selected year
+
+# with col4:
+    # df = store_records[store_records['year'] == selected_year]
+
+    # # Get top sub-categories by sales and profit
+    # top_subs_sales = top_sub_categories_sales(df).rename(columns={'sub_category':'Sub-categories'})
+    # top_subs_profit = top_sub_categories_profit(df).rename(columns={'sub_category':'Sub-categories'})
+
+    # # Merge sales and profit into one DataFrame
+    # merged_df = top_subs_sales.merge(top_subs_profit, on='Sub-categories')
+
+    # # Create a base chart for the sub-categories on the x-axis
+    # base = alt.Chart(merged_df).encode(
+    #     x=alt.X('Sub-categories:N', sort='-y')  # Sort x-axis based on sales or profit
+    # )
+
+    # # Create the sales bar chart
+    # sales_bar = base.mark_bar(color='steelblue').encode(
+    #     y=alt.Y('sales:Q', title='Sales', axis=alt.Axis(format=',d')),
+    #     tooltip=[alt.Tooltip('sales:Q', title='Sales', format=',')]
+    # )
+
+    # # Create the profit bar chart, layered on top of sales, using a different axis
+    # profit_bar = base.mark_bar(color='orange').encode(
+    #     y=alt.Y('profit:Q', title='Profit', axis=alt.Axis(format=',d', titleColor='orange')),
+    #     tooltip=[alt.Tooltip('profit:Q', title='Profit', format=',')]
+    # ).properties(
+    #     width=alt.Step(80),
+    #     height=325,
+    #     title="Top 5 Sub-categories by Sales and Profit"
+    # )
+
+    # # Combine both bar charts by layering them
+    # chart = alt.layer(sales_bar, profit_bar).resolve_scale(
+    #     y='independent'  # This makes both y-axes independent
+    # ).properties(
+    #     padding={"top": 0, "bottom": 0}  # Adjust padding as needed
+    # )
+
+    # # Display the chart in Streamlit
+    # st.altair_chart(chart, use_container_width=True)
+
 
 with col6:
     df = store_records[store_records['year'] == selected_year]

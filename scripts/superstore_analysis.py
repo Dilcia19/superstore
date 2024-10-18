@@ -142,16 +142,18 @@ def top_sub_categories_sales(df_filtered):
     top_5_sub_category_syear = (
         df_filtered
         .filter(['product_id', 'sales', 'product_name',
-                 'category','sub_category'])
+                 'profit','category','sub_category'])
         .groupby(['sub_category'])
         .agg(
-            {'sales':'sum'}
+            {'sales':'sum',
+             'profit':'sum'}
         )
         .rename(columns={'product_id':'product_id_count'})
         .sort_values(by='sales', ascending=False)
         .reset_index()
-        .filter(['sub_category', 'sales'])
+        .filter(['sub_category', 'sales', 'profit'])
         .assign(sales=lambda x: x.sales.round(0))
+        .assign(profit=lambda x: x.profit.round(0))
         .iloc[0:5]
     )
 
