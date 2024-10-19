@@ -186,9 +186,91 @@ with col4:
     # Display the chart in Streamlit
     st.altair_chart(chart, use_container_width=True)
 
+with col5:
+    df = store_records[store_records['year'] == selected_year]
+    top_5_high_sales_categories = high_sales_categories(df)
+    # This chart became top 5 high sales & profit categories
+    df = top_5_high_sales_categories
+    # Prepare the data for the chart
+    chart_data = pd.DataFrame({
+        'category': df['category'].tolist() * 2,  # Duplicate categories for both Sales and Profit
+        'value': df['distribution of sales'].tolist() + df['distribution of profit'].tolist(),  # Combine sales and profit values
+        'type': ['Sales'] * len(df) + ['Profit'] * len(df)  # Indicate type (Sales or Profit)
+    })
+    
+    # Create the sunburst chart with updated color scheme
+    fig = px.sunburst(
+        chart_data,
+        path=['type', 'category'],  # Define hierarchy: first 'type' (Sales or Profit), then 'category'
+        values='value',  # Use the value for size
+        title="Sales and Profit Distribution",
+        color='type',  # Color by type (Sales, Profit)
+        color_discrete_map={'Sales': '#0029ff', 'Profit': '#ff0000'}  # Updated colors: Blue for Sales, Red for Profit
+    )
+    
+    # Update traces to show both labels and values for child nodes (categories)
+    fig.update_traces(
+        texttemplate='<b>%{label}</b><br>%{value:.0f}%',
+        hovertemplate='<b>Distribution: %{value}%</b><br>%{label}'  # Show label and value for each segment
+    )
+    
+    # Update the layout
+    fig.update_layout(
+        title_font_size=14,
+        width=350,
+        height=350,
+        margin=dict(t=30, l=0, r=0, b=0)
+    )
+    
+    # Display the chart in Streamlit
+    st.plotly_chart(fig, use_container_width=True, key="donut1")
+
 
 
 with col6:
+    df = store_records[store_records['year'] == selected_year]
+    top_5_high_profit_segments = high_profit_segments(df)
+    df = top_5_high_profit_segments
+        
+    # Prepare the data for the chart
+    chart_data = pd.DataFrame({
+        'segment': df['segment'].tolist() * 2,  # Duplicate categories for both Sales and Profit
+        'value': df['distribution of sales'].tolist() + df['distribution of profit'].tolist(),  # Combine sales and profit values
+        'type': ['Sales'] * len(df) + ['Profit'] * len(df)  # Indicate type (Sales or Profit)
+    })
+    
+    # Create the sunburst chart with updated color scheme
+    fig = px.sunburst(
+        chart_data,
+        path=['type', 'segment'],  # Define hierarchy: first 'type' (Sales or Profit), then 'category'
+        values='value',  # Use the value for size
+        title="Sales and Profit Distribution",
+        color='type',  # Color by type (Sales, Profit)
+        color_discrete_map={'Sales': '#0029ff', 'Profit': '#ff0000'}  # Updated colors: Blue for Sales, Red for Profit
+    )
+    
+    # Update traces to show both labels and values for child nodes (categories)
+    fig.update_traces(
+        texttemplate='<b>%{label}</b><br>%{value:.0f}%',
+        hovertemplate='<b>Distribution: %{value}%</b><br>%{label}'  # Show label and value for each segment
+    )
+    
+    # Update the layout
+    fig.update_layout(
+        title_font_size=14,
+        width=350,
+        height=350,
+        margin=dict(t=30, l=0, r=0, b=0)
+    )
+    
+    # Display the chart in Streamlit
+    st.plotly_chart(fig, use_container_width=True, key="donut2")
+
+
+
+col7, col8 = st.columns([1, 1])
+
+with col7:
     df = store_records[store_records['year'] == selected_year]
     gp_states_sales = sales_by_state(df)
     gp_states_sales['state_abbrev'] = gp_states_sales['state'].map(states_abbreviation)
@@ -214,92 +296,6 @@ with col6:
     
     # Display the map in Streamlit
     st.plotly_chart(map1, key="map1")
-
-
-col7, col8 = st.columns([3, 2])
-
-with col7:
-    df = store_records[store_records['year'] == selected_year]
-    top_5_high_profit_categories = high_profit_categories(df)
-    top_5_high_sales_categories = high_sales_categories(df)
-    top_5_high_profit_segments = high_profit_segments(df)
-
-    col7_1, col7_2, col7_3= st.columns([.9, .2, .9])
-
-    with col7_1:
-        # This chart became top 5 high sales & profit categories
-        df = top_5_high_sales_categories
-        # Prepare the data for the chart
-        chart_data = pd.DataFrame({
-            'category': df['category'].tolist() * 2,  # Duplicate categories for both Sales and Profit
-            'value': df['distribution of sales'].tolist() + df['distribution of profit'].tolist(),  # Combine sales and profit values
-            'type': ['Sales'] * len(df) + ['Profit'] * len(df)  # Indicate type (Sales or Profit)
-        })
-        
-        # Create the sunburst chart with updated color scheme
-        fig = px.sunburst(
-            chart_data,
-            path=['type', 'category'],  # Define hierarchy: first 'type' (Sales or Profit), then 'category'
-            values='value',  # Use the value for size
-            title="Sales and Profit Distribution",
-            color='type',  # Color by type (Sales, Profit)
-            color_discrete_map={'Sales': '#0029ff', 'Profit': '#ff0000'}  # Updated colors: Blue for Sales, Red for Profit
-        )
-        
-        # Update traces to show both labels and values for child nodes (categories)
-        fig.update_traces(
-            texttemplate='<b>%{label}</b><br>%{value:.0f}%',
-            hovertemplate='<b>Distribution: %{value}%</b><br>%{label}'  # Show label and value for each segment
-        )
-        
-        # Update the layout
-        fig.update_layout(
-            title_font_size=14,
-            width=350,
-            height=350,
-            margin=dict(t=30, l=0, r=0, b=0)
-        )
-        
-        # Display the chart in Streamlit
-        st.plotly_chart(fig, use_container_width=True, key="donut1")
-        
-
-    with col7_3:
-        df = top_5_high_profit_segments
-        
-        # Prepare the data for the chart
-        chart_data = pd.DataFrame({
-            'segment': df['segment'].tolist() * 2,  # Duplicate categories for both Sales and Profit
-            'value': df['distribution of sales'].tolist() + df['distribution of profit'].tolist(),  # Combine sales and profit values
-            'type': ['Sales'] * len(df) + ['Profit'] * len(df)  # Indicate type (Sales or Profit)
-        })
-        
-        # Create the sunburst chart with updated color scheme
-        fig = px.sunburst(
-            chart_data,
-            path=['type', 'segment'],  # Define hierarchy: first 'type' (Sales or Profit), then 'category'
-            values='value',  # Use the value for size
-            title="Sales and Profit Distribution",
-            color='type',  # Color by type (Sales, Profit)
-            color_discrete_map={'Sales': '#0029ff', 'Profit': '#ff0000'}  # Updated colors: Blue for Sales, Red for Profit
-        )
-        
-        # Update traces to show both labels and values for child nodes (categories)
-        fig.update_traces(
-            texttemplate='<b>%{label}</b><br>%{value:.0f}%',
-            hovertemplate='<b>Distribution: %{value}%</b><br>%{label}'  # Show label and value for each segment
-        )
-        
-        # Update the layout
-        fig.update_layout(
-            title_font_size=14,
-            width=350,
-            height=350,
-            margin=dict(t=30, l=0, r=0, b=0)
-        )
-        
-        # Display the chart in Streamlit
-        st.plotly_chart(fig, use_container_width=True, key="donut2")
 
    
 
