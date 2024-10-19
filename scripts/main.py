@@ -214,7 +214,7 @@ with col5:
         chart_data,
         path=['type', 'category'],  # Define hierarchy: first 'type' (Sales or Profit), then 'category'
         values='value',  # Use the value for size
-        title="Sales and Profit Distribution",
+        title="Category Sales and Profit Distribution ",
         color='type',  # Color by type (Sales, Profit)
         color_discrete_map={'Sales': '#0029ff', 'Profit': '#ff0000'}  # Updated colors: Blue for Sales, Red for Profit
     )
@@ -255,7 +255,7 @@ with col6:
         chart_data,
         path=['type', 'segment'],  # Define hierarchy: first 'type' (Sales or Profit), then 'category'
         values='value',  # Use the value for size
-        title="Sales and Profit Distribution",
+        title="Segment Sales and Profit Distribution",
         color='type',  # Color by type (Sales, Profit)
         color_discrete_map={'Sales': '#0029ff', 'Profit': '#ff0000'}  # Updated colors: Blue for Sales, Red for Profit
     )
