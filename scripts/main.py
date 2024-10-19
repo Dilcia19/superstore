@@ -247,8 +247,6 @@ with col5:
 
 
 
-
-
 with col6:
     df = store_records[store_records['year'] == selected_year]
     top_5_high_profit_segments = high_profit_segments(df)
