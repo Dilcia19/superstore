@@ -173,14 +173,17 @@ def sales_by_state(df_filtered):
     return gp_states_sales
 
 def high_profit_products(df_filtered):
+    # data doesn't have cost of product
+    # % margin cannot be calculated
 
     high_low_profit_products = (
         df_filtered
-        .filter(['product_id', 'profit', 'product_name',
+        .filter(['product_id', 'sales','profit','product_name',
                  'category','sub_category'])
         .groupby(['product_id'])
         .agg(
-            {'profit':'sum',
+            {'sales':'sum',
+            'profit':'sum',
             'product_name':'first',
             'category':'first',
             'sub_category':'first'}

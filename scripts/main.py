@@ -123,8 +123,11 @@ with st.sidebar:
         # Use markdown with HTML to color the profit in green
         profit = int(high_profit_products.iloc[i-1]['profit'])
         product_name = high_profit_products.iloc[i-1]['product_name']
+        sales = int(high_profit_products.iloc[i-1]['sales'])
         st.markdown(f"""
-            <p style='margin-bottom: 0px;'>{i}: $ <span style='color:green;'>{profit}:</span>, <strong>{product_name}</strong></p>
+            <p style='margin-bottom: 0px;'>{i}: <strong>{product_name}</strong></p>
+            <p style='margin-bottom: 0px;'>$ <span style='color:blue;'>{sales} </span>in sales</p>
+            <p style='margin-bottom: 0px;'>$ <span style='color:green;'>{profit} </span>in profits</p>
         """, unsafe_allow_html=True)
 
     st.header(f"These five products brought in the least profit in {selected_year}")
@@ -132,8 +135,11 @@ with st.sidebar:
         # Use markdown with HTML to color the profit in green
         profit = int(bottom_5_low_profit.iloc[i-1]['profit'])
         product_name = bottom_5_low_profit.iloc[i-1]['product_name']
+        sales = int(bottom_5_low_profit.iloc[i-1]['sales'])
         st.markdown(f"""
-            <p style='margin-bottom: 0px;'>{i}: $ <span style='color:red;'>{profit}:</span>, <strong>{product_name}</strong></p>
+            <p style='margin-bottom: 0px;'>{i}: <strong>{product_name}</strong></p>
+            <p style='margin-bottom: 0px;'>$ <span style='color:blue;'>{sales} </span>in sales</p>
+            <p style='margin-bottom: 0px;'>$ <span style='color:red;'>{profit} </span>in profits</p>
         """, unsafe_allow_html=True)
     
     
