@@ -227,21 +227,29 @@ with col7:
     col7_1, col7_2, col7_3 = st.columns([1, 1, 1])
 
     with col7_1:
+        # Assuming `top_5_high_sales_categories` is a DataFrame with 'category', 'distribution of sales', and 'distribution of profit' columns
         df = top_5_high_sales_categories
+        # Prepare the data for the chart
         chart_data = pd.DataFrame({
-            'category': df['category'].tolist() * 2,
-            'value': df['distribution of sales'].tolist() + df['distribution of profit'].tolist(),
-            'type': ['Sales'] * len(df) + ['Profit'] * len(df)
+            'category': df['category'].tolist() * 2,  # Duplicate categories for both Sales and Profit
+            'value': df['distribution of sales'].tolist() + df['distribution of profit'].tolist(),  # Combine sales and profit values
+            'type': ['Sales'] * len(df) + ['Profit'] * len(df)  # Indicate type (Sales or Profit)
         })
 
         # Create the sunburst chart
         fig = px.sunburst(
             chart_data,
-            path=['type', 'category'],
-            values='value',
+            path=['type', 'category'],  # Define hierarchy: first 'type' (Sales or Profit), then 'category'
+            values='value',  # Use the value for size
             title="Sales and Profit Distribution by Category",
-            color='type',
-            color_discrete_map={'Sales': '#636EFA', 'Profit': '#EF553B'}
+            color='type',  # Color by type (Sales, Profit)
+            color_discrete_map={'Sales': '#636EFA', 'Profit': '#EF553B'}  # Custom colors for Sales and Profit
+        )
+
+        # Update traces to show both labels and values for child nodes (categories)
+        fig.update_traces(
+            texttemplate='<b>%{label}</b><br>%{value:.0f}%',
+            hovertemplate='<b>% of Distribution: %{value}'  # Show label and value for each segment
         )
 
         # Update the layout
