@@ -116,10 +116,10 @@ def repeat_customers(store_records):
     # not_first_order = number_of_repeat_orders - number_of_unique_customers
 
     return pct_repeated_orders
-    
+
 
 def top_sub_categories_sales(df_filtered):
-    # this became top sub categories profit & saleså
+    # this function became top sub categories profit & saleså
 
     top_5_sub_category_syear = (
         df_filtered
