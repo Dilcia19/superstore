@@ -253,17 +253,23 @@ def high_profit_segments(df_filtered):
 
     high_profit_segments = (
         df_filtered
-        .filter(['segment','profit'])
+        .filter(['segment','sales','profit'])
         .groupby(['segment'])
         .agg(
-            {'profit':'sum'}
+            {'sales':'sum',
+             'profit':'sum'}
         )
         .reset_index()
-        .sort_values(by='profit', ascending=False)
+        .sort_values(by='sales', ascending=False)
+        .assign(total_year_sales=lambda x: x.sales.sum())
+        .assign(segment_sales_pct=lambda x: (x.sales / x.total_year_sales) * 100)
+        .assign(segment_sales_pct=lambda x: x.segment_sales_pct.round(0))
+        .rename(columns={'segment_sales_pct':'distribution of sales'})
         .assign(total_year_profit=lambda x: x.profit.sum())
         .assign(segment_profit_pct=lambda x: (x.profit / x.total_year_profit) * 100)
         .assign(segment_profit_pct=lambda x: x.segment_profit_pct.round(0))
-        .rename(columns={'segment_profit_pct':'percent of profit'})
+        .rename(columns={'segment_profit_pct':'distribution of profit'})
+        .filter(['segment','distribution of sales', 'distribution of profit'])
         .iloc[0:5]
     )
 
