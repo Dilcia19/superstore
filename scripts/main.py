@@ -305,9 +305,8 @@ with col7:
     gp_states_sales['state_abbrev'] = gp_states_sales['state'].map(states_abbreviation)
     gp_states_sales = gp_states_sales.rename(columns={'state_abbrev':'location'})
 
-
-    # Create a custom color scale: red for negative profits, blue for positive profits
-    # color_scale = [[0, 'red'], [0.5, 'lightgray'], [1, 'blue']]  # Adjust lightgray for profits near zero
+    # Custom blue to white color scale
+    custom_blue_to_white_scale = [(0, '#ffffff'), (1, '#0029ff')]  # White for 0 sales, deep blue for high sales
 
     # Create a map
     map1 = px.choropleth(
@@ -317,7 +316,7 @@ with col7:
         color='sales',
         scope='usa',
         hover_name='state',
-        color_continuous_scale='blues'
+        color_continuous_scale=custom_blue_to_white_scale  # Apply the custom scale from white to blue
     )
 
     # Update layout
@@ -325,6 +324,8 @@ with col7:
     
     # Display the map in Streamlit
     st.plotly_chart(map1, key="map1")
+
+
 
    
 
