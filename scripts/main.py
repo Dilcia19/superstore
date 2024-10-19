@@ -168,17 +168,21 @@ st.markdown("<hr style='margin-top: 10px;'>", unsafe_allow_html=True)
 col4, col5, col6 = st.columns([2, 1, 1])
 
 with col4:
+    # with col4:
     df = store_records[store_records['year'] == selected_year]
     top_subs = top_sub_categories_sales(df)
     
     # Melt the dataframe to long format for easier plotting
     melted_df = pd.melt(top_subs, id_vars=['sub_category'], value_vars=['sales', 'profit'], var_name='Metric', value_name='Value')
 
+    # Define custom colors for sales and profit
+    color_scale = alt.Scale(domain=['sales', 'profit'], range=['#0029ff', '#ff0000'])
+
     # Create the chart
     chart = alt.Chart(melted_df).mark_bar().encode(
         x=alt.X('sub_category:N', title='Sub-category', sort='-y'),  # Sub-category axis
         y=alt.Y('Value:Q', title='Amount in Sales/Profit'),  # Amount axis
-        color=alt.Color('Metric:N', sort=['sales', 'profit']),  # Sort to display sales first in color legend
+        color=alt.Color('Metric:N', scale=color_scale, sort=['sales', 'profit']),  # Custom colors for sales and profit
         xOffset=alt.XOffset('Metric:N', sort=['sales', 'profit']),  # Ensure sales comes first in the offset
         tooltip=[alt.Tooltip('sub_category:N', title='Sub-category'),
                  alt.Tooltip('Metric:N', title='Metric'),
@@ -191,6 +195,7 @@ with col4:
 
     # Display the chart in Streamlit
     st.altair_chart(chart, use_container_width=True)
+
 
 with col5:
     df = store_records[store_records['year'] == selected_year]
