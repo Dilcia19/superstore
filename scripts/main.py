@@ -159,7 +159,7 @@ with col3:
 
 st.markdown("<hr style='margin-top: 10px;'>", unsafe_allow_html=True)
 
-col4, col5, col6 = st.columns([1.5, 1.5, 2])
+col4, col5, col6 = st.columns([2, 1, 1])
 
 with col4:
     df = store_records[store_records['year'] == selected_year]
@@ -179,7 +179,7 @@ with col4:
                  alt.Tooltip('Value:Q', title='Amount', format=',')]  # Add comma format to the Value
     ).properties(
         width=alt.Step(40),
-        height=325,
+        height=350,
         title="Sales and profits, top 5 categories"
     )
 
