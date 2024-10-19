@@ -33,20 +33,31 @@ Nearly 40% of customers who made a purchase have come back to make another purch
 
 **Key Findings**
 
+Great Markets:
+- Year after year, California and New York outperform the rest of the markets in terms of sales and profits. 
+- In 2017, California had $146,000 in sales and brought in $29,000 in profits. 
+- New York had $93,000 in sales and brought in $24,000 in profits. These markets should continue to be invested in heavily.
+
+Great Category:
+- The technology and office supplies categories bring in the highest profits. 
+- In 2017, both categories together accounted for 71% of the sales, but accounted for 97% of the profit. Investing further in either or both of these categories can yield great results.
+
+Great Products:
+- The `Canon imageCLASS 2200 Advanced Copier` consistently brought in high profits for the past 2 years.
+- Copiers in general, are a good product to invest in, they generate high profits even with low volume.
+- Each year, there is at least one copier on the list for top 5 products profitable products.
+
 Troublesome Markets:
 - Year after year, Texas and Illinois profits were consistently negative. In 2014, Texas had a net profit of -$9,000 and has remained negative, although the loss in profits fluctuate significantly year to year.
 - Illinois had a net profit of -$2,000 in 2014, but by 2017, that number had dropped to -$6,000.
 
-Troublesome Segments:
-- In 2014, the furniture segment accounted for 11% of Superstore profits, but by 2017, that number had dropped to 3%.
-- Meanwhile the furniture segment consistently accounted for about 30% of sales annually.
+Troublesome Category:
+- In 2014, the furniture category accounted for 11% of Superstore profits, but by 2017, that number had dropped to 3%.
+- Meanwhile the furniture category consistently accounted for about 30% of sales annually.
 
 Trouble Products:
 - `Cubify CubeX 3D Printer`, a machines sold by the Superstore, have consistently lost the superstore money. 
 - The two versions of this product: `Cubify CubeX 3D Printer Double Head Print` and `Cubify CubeX 3D Printer Triple Head Print` have appeared on the list of biggest profit losers 3 out of 4 years of operation.
 - It is likely time to drop this product. 
-
-Great Products:
-- In terms of products to invest in, copiers do well - they sell for a higher price point and are often in the list for top profitable products of the year.
 
 
