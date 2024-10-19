@@ -235,23 +235,23 @@ with col7:
             'value': df['distribution of sales'].tolist() + df['distribution of profit'].tolist(),  # Combine sales and profit values
             'type': ['Sales'] * len(df) + ['Profit'] * len(df)  # Indicate type (Sales or Profit)
         })
-
-        # Create the sunburst chart
+        
+        # Create the sunburst chart with updated color scheme
         fig = px.sunburst(
             chart_data,
             path=['type', 'category'],  # Define hierarchy: first 'type' (Sales or Profit), then 'category'
             values='value',  # Use the value for size
-            title="Sales and Profit Distribution by Category",
+            title="Sales and Profit Distribution",
             color='type',  # Color by type (Sales, Profit)
-            color_discrete_map={'Sales': '#636EFA', 'Profit': '#EF553B'}  # Custom colors for Sales and Profit
+            color_discrete_map={'Sales': '#0029ff', 'Profit': '#ff0000'}  # Updated colors: Blue for Sales, Red for Profit
         )
-
+        
         # Update traces to show both labels and values for child nodes (categories)
         fig.update_traces(
             texttemplate='<b>%{label}</b><br>%{value:.0f}%',
-            hovertemplate='<b>% of Distribution: %{value}'  # Show label and value for each segment
+            hovertemplate='<b>Distribution: %{value}%</b><br>%{label}'  # Show label and value for each segment
         )
-
+        
         # Update the layout
         fig.update_layout(
             title_font_size=14,
@@ -259,7 +259,7 @@ with col7:
             height=350,
             margin=dict(t=30, l=0, r=0, b=0)
         )
-
+        
         # Display the chart in Streamlit
         st.plotly_chart(fig, use_container_width=True)
 
