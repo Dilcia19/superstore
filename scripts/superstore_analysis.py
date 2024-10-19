@@ -116,28 +116,10 @@ def repeat_customers(store_records):
     # not_first_order = number_of_repeat_orders - number_of_unique_customers
 
     return pct_repeated_orders
-
-def top_sub_categories_profit(df_filtered):
-
-    top_5_sub_category_year = (
-        df_filtered
-        .filter(['product_id', 'profit', 'product_name',
-                 'category','sub_category'])
-        .groupby(['sub_category'])
-        .agg(
-            {'profit':'sum'}
-        )
-        .rename(columns={'product_id':'product_id_count'})
-        .sort_values(by='profit', ascending=False)
-        .reset_index()
-        .filter(['sub_category', 'profit'])
-        .assign(profit=lambda x: x.profit.round(0))
-        .iloc[0:5]
-    )
-
-    return top_5_sub_category_year
+    
 
 def top_sub_categories_sales(df_filtered):
+    # this became top sub categories profit & saleså
 
     top_5_sub_category_syear = (
         df_filtered
