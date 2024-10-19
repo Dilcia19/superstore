@@ -227,10 +227,11 @@ def high_sales_categories(df_filtered):
 
     top_5_high_sales_categories = (
         df_filtered
-        .filter(['category','sales'])
+        .filter(['category','sales','profit'])
         .groupby(['category'])
         .agg(
-            {'sales':'sum'}
+            {'sales':'sum',
+             'profit':'sum'}
         )
         .reset_index()
         .sort_values(by='sales', ascending=False)
@@ -238,6 +239,11 @@ def high_sales_categories(df_filtered):
         .assign(category_sales_pct=lambda x: (x.sales / x.total_year_sales) * 100)
         .assign(category_sales_pct=lambda x: x.category_sales_pct.round(0))
         .rename(columns={'category_sales_pct':'distribution of sales'})
+        .assign(total_year_profit=lambda x: x.profit.sum())
+        .assign(category_profit_pct=lambda x: (x.profit / x.total_year_profit) * 100)
+        .assign(category_profit_pct=lambda x: x.category_profit_pct.round(0))
+        .rename(columns={'category_profit_pct':'distribution of profit'})
+        .filter(['category','distribution of sales', 'distribution of profit'])
         .iloc[0:5]
     )
 

@@ -6,6 +6,8 @@ import streamlit as st
 import altair as alt
 import pydeck as pdk
 import plotly.express as px
+import plotly.graph_objects as go
+
 
 
 import pandas as pd
@@ -225,60 +227,90 @@ with col7:
     col7_1, col7_2, col7_3 = st.columns([1, 1, 1])
 
     with col7_1:
-        fig1 = px.pie(
-            top_5_high_sales_categories,
-            values='distribution of sales',
-            names='category',
-            hole=0.6,
-            title="Sales Distribution by Category"
+        df = top_5_high_sales_categories
+        chart_data = pd.DataFrame({
+            'category': df['category'].tolist() * 2,
+            'value': df['distribution of sales'].tolist() + df['distribution of profit'].tolist(),
+            'type': ['Sales'] * len(df) + ['Profit'] * len(df)
+        })
+
+        # Create the sunburst chart
+        fig = px.sunburst(
+            chart_data,
+            path=['type', 'category'],
+            values='value',
+            title="Sales and Profit Distribution by Category",
+            color='type',
+            color_discrete_map={'Sales': '#636EFA', 'Profit': '#EF553B'}
         )
-        # Show only percentages
-        fig1.update_traces(textinfo='percent')
-        fig1.update_layout(
-            legend=dict(font=dict(size=8)),  # Smaller legend font size
+
+        # Update the layout
+        fig.update_layout(
             title_font_size=14,
-            width=350,  # Slightly bigger width
-            height=350  # Slightly bigger height
+            width=350,
+            height=350,
+            margin=dict(t=30, l=0, r=0, b=0)
         )
-        st.plotly_chart(fig1, use_container_width=True, key="donut1")
+
+        # Display the chart in Streamlit
+        st.plotly_chart(fig, use_container_width=True)
+
+    # with col7_1:
+    #     st.dataframe(top_5_high_sales_categories)
+    #     fig1 = px.pie(
+    #         top_5_high_sales_categories,
+    #         values='distribution of sales',
+    #         names='category',
+    #         hole=0.6,
+    #         title="Sales Distribution by Category"
+    #     )
+    #     # Show only percentages
+    #     fig1.update_traces(textinfo='percent')
+    #     fig1.update_layout(
+    #         legend=dict(font=dict(size=8)),  # Smaller legend font size
+    #         title_font_size=14,
+    #         width=350,  # Slightly bigger width
+    #         height=350  # Slightly bigger height
+    #     )
+    #     st.plotly_chart(fig1, use_container_width=True, key="donut1")
         
 
-    with col7_2:
-        fig2 = px.pie(
-            top_5_high_profit_categories,
-            values='distribution of profit',
-            names='category',
-            hole=0.6,
-            title="Profit Distribution by Category"
-        )
-        # Show only percentages
-        fig2.update_traces(textinfo='percent')
-        fig2.update_layout(
-            legend=dict(font=dict(size=8)),  # Smaller legend font size
-            title_font_size=14,
-            width=350,  # Slightly bigger width
-            height=350  # Slightly bigger height
-        )
-        st.plotly_chart(fig2, use_container_width=True, key="donut2")
+    # with col7_2:
+    #     fig2 = px.pie(
+    #         top_5_high_profit_categories,
+    #         values='distribution of profit',
+    #         names='category',
+    #         hole=0.6,
+    #         title="Profit Distribution by Category"
+    #     )
+    #     # Show only percentages
+    #     fig2.update_traces(textinfo='percent')
+    #     fig2.update_layout(
+    #         legend=dict(font=dict(size=8)),  # Smaller legend font size
+    #         title_font_size=14,
+    #         width=350,  # Slightly bigger width
+    #         height=350  # Slightly bigger height
+    #     )
+    #     st.plotly_chart(fig2, use_container_width=True, key="donut2")
 
 
-    with col7_3:
-        fig3 = px.pie(
-            top_5_high_profit_segments,
-            values='percent of profit',
-            names='segment',
-            hole=0.6,
-            title="Segment by Profit %"
-        )
-        # Show only percentages
-        fig3.update_traces(textinfo='percent')
-        fig3.update_layout(
-            legend=dict(font=dict(size=8)),  # Smaller legend font size
-            title_font_size=14,
-            width=350,  # Slightly bigger width
-            height=350  # Slightly bigger height
-        )
-        st.plotly_chart(fig3, use_container_width=True, key="donut3")
+    # with col7_3:
+    #     fig3 = px.pie(
+    #         top_5_high_profit_segments,
+    #         values='percent of profit',
+    #         names='segment',
+    #         hole=0.6,
+    #         title="Segment by Profit %"
+    #     )
+    #     # Show only percentages
+    #     fig3.update_traces(textinfo='percent')
+    #     fig3.update_layout(
+    #         legend=dict(font=dict(size=8)),  # Smaller legend font size
+    #         title_font_size=14,
+    #         width=350,  # Slightly bigger width
+    #         height=350  # Slightly bigger height
+    #     )
+    #     st.plotly_chart(fig3, use_container_width=True, key="donut3")
    
 
 with col8:
