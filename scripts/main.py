@@ -196,16 +196,25 @@ with col4:
     # Display the chart in Streamlit
     st.altair_chart(chart, use_container_width=True)
 
-
 with col5:
     df = store_records[store_records['year'] == selected_year]
     top_5_high_sales_categories = high_sales_categories(df)
+
     # This chart became top 5 high sales & profit categories
     df = top_5_high_sales_categories
+    
     # Prepare the data for the chart
+    sales_total = sum(df['distribution of sales'])
+    profit_total = sum(df['distribution of profit'])
+    
+    # Normalize sales and profit so they don't exceed 100% when combined
+    df['normalized_sales'] = df['distribution of sales'] / sales_total * 100
+    df['normalized_profit'] = df['distribution of profit'] / profit_total * 100
+    
+    # Create the chart data
     chart_data = pd.DataFrame({
         'category': df['category'].tolist() * 2,  # Duplicate categories for both Sales and Profit
-        'value': df['distribution of sales'].tolist() + df['distribution of profit'].tolist(),  # Combine sales and profit values
+        'value': df['normalized_sales'].tolist() + df['normalized_profit'].tolist(),  # Combine normalized sales and profit values
         'type': ['Sales'] * len(df) + ['Profit'] * len(df)  # Indicate type (Sales or Profit)
     })
     
@@ -213,16 +222,16 @@ with col5:
     fig = px.sunburst(
         chart_data,
         path=['type', 'category'],  # Define hierarchy: first 'type' (Sales or Profit), then 'category'
-        values='value',  # Use the value for size
-        title="Category Sales and Profit Distribution ",
+        values='value',  # Use the normalized value for size
+        title="Category Sales and Profit Distribution",
         color='type',  # Color by type (Sales, Profit)
         color_discrete_map={'Sales': '#0029ff', 'Profit': '#ff0000'}  # Updated colors: Blue for Sales, Red for Profit
     )
     
     # Update traces to show both labels and values for child nodes (categories)
     fig.update_traces(
-        texttemplate='<b>%{label}</b><br>%{value:.0f}%',
-        hovertemplate='<b>Distribution: %{value}%</b><br>%{label}'  # Show label and value for each segment
+        texttemplate='<b>%{label}</b><br>%{value:.1f}%',  # Show percentages with 1 decimal point
+        hovertemplate='<b>Distribution: %{value:.1f}%</b><br>%{label}'  # Show label and value for each segment
     )
     
     # Update the layout
@@ -238,34 +247,44 @@ with col5:
 
 
 
+
+
 with col6:
     df = store_records[store_records['year'] == selected_year]
     top_5_high_profit_segments = high_profit_segments(df)
     df = top_5_high_profit_segments
-        
+
+    # Calculate total sales and profit
+    sales_total = sum(df['distribution of sales'])
+    profit_total = sum(df['distribution of profit'])
+
+    # Normalize sales and profit to ensure they don't exceed 100%
+    df['normalized_sales'] = df['distribution of sales'] / sales_total * 100
+    df['normalized_profit'] = df['distribution of profit'] / profit_total * 100
+
     # Prepare the data for the chart
     chart_data = pd.DataFrame({
         'segment': df['segment'].tolist() * 2,  # Duplicate categories for both Sales and Profit
-        'value': df['distribution of sales'].tolist() + df['distribution of profit'].tolist(),  # Combine sales and profit values
+        'value': df['normalized_sales'].tolist() + df['normalized_profit'].tolist(),  # Combine normalized sales and profit values
         'type': ['Sales'] * len(df) + ['Profit'] * len(df)  # Indicate type (Sales or Profit)
     })
-    
+
     # Create the sunburst chart with updated color scheme
     fig = px.sunburst(
         chart_data,
-        path=['type', 'segment'],  # Define hierarchy: first 'type' (Sales or Profit), then 'category'
-        values='value',  # Use the value for size
+        path=['type', 'segment'],  # Define hierarchy: first 'type' (Sales or Profit), then 'segment'
+        values='value',  # Use the normalized value for size
         title="Segment Sales and Profit Distribution",
         color='type',  # Color by type (Sales, Profit)
         color_discrete_map={'Sales': '#0029ff', 'Profit': '#ff0000'}  # Updated colors: Blue for Sales, Red for Profit
     )
-    
+
     # Update traces to show both labels and values for child nodes (categories)
     fig.update_traces(
-        texttemplate='<b>%{label}</b><br>%{value:.0f}%',
-        hovertemplate='<b>Distribution: %{value}%</b><br>%{label}'  # Show label and value for each segment
+        texttemplate='<b>%{label}</b><br>%{value:.1f}%',  # Show percentages with 1 decimal point
+        hovertemplate='<b>Distribution: %{value:.1f}%</b><br>%{label}'  # Show label and value for each segment
     )
-    
+
     # Update the layout
     fig.update_layout(
         title_font_size=14,
@@ -273,9 +292,10 @@ with col6:
         height=350,
         margin=dict(t=30, l=0, r=0, b=0)
     )
-    
+
     # Display the chart in Streamlit
     st.plotly_chart(fig, use_container_width=True, key="donut2")
+
 
 
 
