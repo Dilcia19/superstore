@@ -110,11 +110,13 @@ st.write("\n")
 
 with st.sidebar:
     st.title("Superstore Dashboard")
+
+    st.write("The Super Store was founded in 2014 and has seen year over year growth in sales and profits. With the elimination of a few key products and unprofitable geographical markets, the super store will generate record profits and sales for years to come.")
+
     selected_year = st.sidebar.selectbox("Select Year:", np.sort(store_records["year"].unique())[::-1])
     df = store_records[store_records['year'] == selected_year]
     high_profit_products, bottom_5_low_profit = high_profit_products(df)
-    st.write("- The Super Store was founded at the end of 2013 and started selling products in 2014.")
-    st.write("- The store has seen year over year growth in terms of sales and profits. With the elimination of a few key products and a few unprofitable geographical markets, we will set up the super store to break record profits and sales in the upcoming years.")
+
     st.header(f"These five products brought in the most profit in {selected_year}")
 
     for i in range(1, 6):
