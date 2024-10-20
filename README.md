@@ -3,7 +3,7 @@
 **Overview:** The goal of the super store analysis is to analyze the distribution of sales and profits between the years 2014-2017. The analysis and dashboard provides data to inform stakeholders on which products to promote and discontinue; in addition, highlights markets that are performing well and ones that are not.
 
 - Insights are provided based on profit and sales metrics.
-- The live dashboard can be found [here](https://superstore-bi-analysis.streamlit.app)
+- The live dashboard can be found [here.](https://superstore-bi-analysis.streamlit.app)
 - The pandas queries used to analyze the data can be found [here.](https://github.com/Dilcia19/superstore_analysis/blob/main/scripts/superstore_analysis.py)
 - The code powering the dashboard can be found [here.](https://github.com/Dilcia19/superstore_analysis/blob/main/scripts/main.py)
 
