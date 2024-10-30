@@ -47,6 +47,7 @@ Great Products:
 - The `Canon imageCLASS 2200 Advanced Copier` consistently brought in high profits for the past 2 years.
 - Copiers in general, are a good product to invest in, they generate high profits even with low volume.
 - Each year, there is at least one copier on the list for top 5 products profitable products.
+- Copiers in general have a healthy profit margin. In the most recent year, the `Canon imageCLASS 2200 Advanced Copier` had a profit margin of 44%.
 
 Troublesome Markets:
 - Year after year, Texas and Illinois profits were consistently negative. In 2014, Texas had a net profit of -$9,000 and has remained negative, although the loss in profits fluctuate significantly year to year.
@@ -60,5 +61,6 @@ Trouble Products:
 - `Cubify CubeX 3D Printer`, a machines sold by the Superstore, have consistently lost the superstore money. 
 - The two versions of this product: `Cubify CubeX 3D Printer Double Head Print` and `Cubify CubeX 3D Printer Triple Head Print` have appeared on the list of biggest profit losers 3 out of 4 years of operation.
 - It is likely time to drop this product. 
+- The profit margin for the `Cubify CubeX 3D Printer` is -48%, and generally a bad investment for inventory.
 
 
