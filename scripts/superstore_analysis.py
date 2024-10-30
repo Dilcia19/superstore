@@ -190,6 +190,8 @@ def high_profit_products(df_filtered):
         )
         .reset_index()
         .assign(profit=lambda x: x.profit.round(0))
+        .assign(percent_margin=lambda x: (x.profit / x.sales) * 100)
+        .assign(percent_margin=lambda x: x.percent_margin.round(0))
     )
 
     top_5_high_profit = (
